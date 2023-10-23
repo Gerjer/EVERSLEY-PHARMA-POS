@@ -1,0 +1,1584 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7261F063-4C68-4153-8BCB-4027C5667062}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>ArkAntSoftwarePOS.My.MyApplication</StartupObject>
+    <RootNamespace>ArkAntSoftwarePOS</RootNamespace>
+    <AssemblyName>ArkAntSoftwarePOS</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>Off</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationIcon>arkant_ecs_new.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>ArkAntSoftwarePOS.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>ArkAntSoftwarePOS.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DocumentationFile>ArkAntSoftwarePOS.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DocumentationFile>ArkAntSoftwarePOS.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.vb</CodeAnalysisModuleSuppressionsFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ActiveReports.Chart, Version=5.3.1436.2, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL" />
+    <Reference Include="ActiveReports.CodeDomSerializer, Version=5.3.1436.2, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL" />
+    <Reference Include="ActiveReports.Design3, Version=5.3.1436.2, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL" />
+    <Reference Include="ActiveReports.HtmlExport, Version=5.3.1436.2, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL" />
+    <Reference Include="ActiveReports.Interop, Version=5.3.1436.2, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=x86" />
+    <Reference Include="ActiveReports.PdfExport, Version=5.3.1436.2, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL" />
+    <Reference Include="ActiveReports.RtfExport, Version=5.3.1436.2, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL" />
+    <Reference Include="ActiveReports.TextExport, Version=5.3.1436.2, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL" />
+    <Reference Include="ActiveReports.TiffExport, Version=5.3.1436.2, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL" />
+    <Reference Include="ActiveReports.Viewer3, Version=5.3.1436.2, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL" />
+    <Reference Include="ActiveReports.Web, Version=5.3.1436.2, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL" />
+    <Reference Include="ActiveReports.Web.Design, Version=5.3.1436.2, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL" />
+    <Reference Include="ActiveReports.XlsExport, Version=5.3.1436.2, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL" />
+    <Reference Include="ActiveReports3, Version=5.3.1436.2, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL" />
+    <Reference Include="ARVSPackage, Version=5.3.1436.2, Culture=neutral, PublicKeyToken=cc4967777c49a3ff, processorArchitecture=MSIL" />
+    <Reference Include="C1.Win.C1TrueDBGrid.2, Version=2.0.20073.61130, Culture=neutral, PublicKeyToken=75ae3fb0e2b1e0da, processorArchitecture=MSIL" />
+    <Reference Include="DevComponents.DotNetBar2, Version=7.3.0.1, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.BonusSkins.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevExpress.BonusSkins.v18.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Charts.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.CodeParser.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevExpress.Data.v18.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.DataAccess.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevExpress.DataAccess.v18.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.ExpressApp.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Office.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Pdf.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Persistent.Base.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.PivotGrid.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v18.2.Export, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Sparkline.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v18.2.UI, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Xpo.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevExpress.XtraBars.v18.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraCharts.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevExpress.XtraEditors.v18.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraGauges.v18.2.Core, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevExpress.XtraGrid.v18.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevExpress.XtraLayout.v18.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevExpress.XtraNavBar.v18.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraPdfViewer.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevExpress.XtraPdfViewer.v18.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraPrinting.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevExpress.XtraPrinting.v18.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevExpress.XtraReports.v18.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v18.2.CodeCompletion, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevExpress.XtraReports.v18.2.CodeCompletion.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v18.2.Extensions, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevExpress.XtraReports.v18.2.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraReports.v18.2.Service, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevExpress.XtraReports.v18.2.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevExpress.XtraRichEdit.v18.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraRichEdit.v18.2.Extensions, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevExpress.XtraRichEdit.v18.2.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraTreeList.v18.2, Version=18.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevExpress.XtraTreeList.v18.2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationClient" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="00MainForms\About.Designer.vb">
+      <DependentUpon>About.vb</DependentUpon>
+    </Compile>
+    <Compile Include="00MainForms\About.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="00MainForms\ArkAntSoftSplashScreen.Designer.vb">
+      <DependentUpon>ArkAntSoftSplashScreen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="00MainForms\ArkAntSoftSplashScreen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="00MainForms\fmaDateRange_DailyViewer.Designer.vb">
+      <DependentUpon>fmaDateRange_DailyViewer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="00MainForms\fmaDateRange_DailyViewer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="00MainForms\fmaInventoryDialog.Designer.vb">
+      <DependentUpon>fmaInventoryDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="00MainForms\fmaInventoryDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="00MainForms\fmaReport_DailyForm.Designer.vb">
+      <DependentUpon>fmaReport_DailyForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="00MainForms\fmaReport_DailyForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="00MainForms\fmaReturnedItemDialog.Designer.vb">
+      <DependentUpon>fmaReturnedItemDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="00MainForms\fmaReturnedItemDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="00MainForms\fmzNumericKeysForm.Designer.vb">
+      <DependentUpon>fmzNumericKeysForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="00MainForms\fmzNumericKeysForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="00MainForms\frmCompanyProfileSetup.Designer.vb">
+      <DependentUpon>frmCompanyProfileSetup.vb</DependentUpon>
+    </Compile>
+    <Compile Include="00MainForms\frmCompanyProfileSetup.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="00MainForms\frmSU_Pass.Designer.vb">
+      <DependentUpon>frmSU_Pass.vb</DependentUpon>
+    </Compile>
+    <Compile Include="00MainForms\frmSU_Pass.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="00MainForms\ftDatabaseConnectionForm.Designer.vb">
+      <DependentUpon>ftDatabaseConnectionForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="00MainForms\ftDatabaseConnectionForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="00MainForms\ftLoginForm.Designer.vb">
+      <DependentUpon>ftLoginForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="00MainForms\ftLoginForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="00MainForms\ftmdiMainForm.Designer.vb">
+      <DependentUpon>ftmdiMainForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="00MainForms\ftmdiMainForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="00MainForms\fzzReportViewerForm.Designer.vb">
+      <DependentUpon>fzzReportViewerForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="00MainForms\fzzReportViewerForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="00MainForms\Mainloading.Designer.vb">
+      <DependentUpon>Mainloading.vb</DependentUpon>
+    </Compile>
+    <Compile Include="00MainForms\Mainloading.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="00MainForms\progressDialog.Designer.vb">
+      <DependentUpon>progressDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="00MainForms\progressDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="00MainForms\ShowLoading.Designer.vb">
+      <DependentUpon>ShowLoading.vb</DependentUpon>
+    </Compile>
+    <Compile Include="00MainForms\ShowLoading.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="00MainForms\xtrMainForm.Designer.vb">
+      <DependentUpon>xtrMainForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="00MainForms\xtrMainForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaGeneralServicesListofMed.Designer.vb">
+      <DependentUpon>fmaGeneralServicesListofMed.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaGeneralServicesListofMed.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\DotNetBar\DevComponentsControls.Designer.vb">
+      <DependentUpon>DevComponentsControls.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\DotNetBar\DevComponentsControls.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaItemIssuanceList.Designer.vb">
+      <DependentUpon>fmaItemIssuanceList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaItemIssuanceList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaItemViewDiscription.Designer.vb">
+      <DependentUpon>fmaItemViewDiscription.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaItemViewDiscription.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPatientMonitoringList.Designer.vb">
+      <DependentUpon>fmaPatientMonitoringList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPatientMonitoringList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPriceAvailableListForm.Designer.vb">
+      <DependentUpon>fmaPriceAvailableListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPriceAvailableListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPRListForm.Designer.vb">
+      <DependentUpon>fmaPRListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPRListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaProcurementListForm.Designer.vb">
+      <DependentUpon>fmaProcurementListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaProcurementListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPurchaseRequestSetupForm.Designer.vb">
+      <DependentUpon>fmaPurchaseRequestSetupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPurchaseRequestSetupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaReceivedByPopUpForm.Designer.vb">
+      <DependentUpon>fmaReceivedByPopUpForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaReceivedByPopUpForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaReOrdeingPointList.Designer.vb">
+      <DependentUpon>fmaReOrdeingPointList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaReOrdeingPointList.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaRISListForm.Designer.vb">
+      <DependentUpon>fmaRISListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaRISListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaRISSetupForm.Designer.vb">
+      <DependentUpon>fmaRISSetupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaRISSetupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaInventoryCountPerSupplierListForm.Designer.vb">
+      <DependentUpon>fmaInventoryCountPerSupplierListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaInventoryCountPerSupplierListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaMonthlyInventoryPerSupplierListForm.Designer.vb">
+      <DependentUpon>fmaMonthlyInventoryPerSupplierListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaMonthlyInventoryPerSupplierListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaReplinishmentListForm.Designer.vb">
+      <DependentUpon>fmaReplinishmentListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaReplinishmentListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaReplinishmentSetupForm.Designer.vb">
+      <DependentUpon>fmaReplinishmentSetupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaReplinishmentSetupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaIssuanceSummarySheetForm.Designer.vb">
+      <DependentUpon>fmaIssuanceSummarySheetForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaIssuanceSummarySheetForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaStockCardForm.Designer.vb">
+      <DependentUpon>fmaStockCardForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaStockCardForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaStorageLocationListForm.Designer.vb">
+      <DependentUpon>fmaStorageLocationListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaStorageLocationListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaStorageLocationSetupForm.Designer.vb">
+      <DependentUpon>fmaStorageLocationSetupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaStorageLocationSetupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaSupplierMasterListForm.Designer.vb">
+      <DependentUpon>fmaSupplierMasterListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaSupplierMasterListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaSupplierSetupForm.Designer.vb">
+      <DependentUpon>fmaSupplierSetupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaSupplierSetupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaTimelinessForm.Designer.vb">
+      <DependentUpon>fmaTimelinessForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaTimelinessForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaUpdateBegBalForm.Designer.vb">
+      <DependentUpon>fmaUpdateBegBalForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaUpdateBegBalForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaWardListForm.Designer.vb">
+      <DependentUpon>fmaWardListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaWardListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaWardSetupForm.Designer.vb">
+      <DependentUpon>fmaWardSetupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaWardSetupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPersonProfileListForm.Designer.vb">
+      <DependentUpon>fmaPersonProfileListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPersonProfileListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPersonProfileSetupForm.Designer.vb">
+      <DependentUpon>fmaPersonProfileSetupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPersonProfileSetupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPatientTypeMasterListForm.Designer.vb">
+      <DependentUpon>fmaPatientTypeMasterListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPatientTypeMasterListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPatientTypeMasterSetupForm.Designer.vb">
+      <DependentUpon>fmaPatientTypeMasterSetupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPatientTypeMasterSetupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaMedicineIssuanceForm.Designer.vb">
+      <DependentUpon>fmaMedicineIssuanceForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaMedicineIssuanceForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaCloseTransactionDayDlg.Designer.vb">
+      <DependentUpon>fmaCloseTransactionDayDlg.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaCloseTransactionDayDlg.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaMedTypeListForm.Designer.vb">
+      <DependentUpon>fmaMedTypeListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaMedTypeListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaMedTypeSetupForm.Designer.vb">
+      <DependentUpon>fmaMedTypeSetupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaMedTypeSetupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaMonthlySalesReportForm.Designer.vb">
+      <DependentUpon>fmaMonthlySalesReportForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaMonthlySalesReportForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPharmaMasterListForm.Designer.vb">
+      <DependentUpon>fmaPharmaMasterListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPharmaMasterListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaInventoryMasterListForm.Designer.vb">
+      <DependentUpon>fmaInventoryMasterListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaInventoryMasterListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaInventoryMasterSetupForm.Designer.vb">
+      <DependentUpon>fmaInventoryMasterSetupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaInventoryMasterSetupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPOSItemInquiryForm.Designer.vb">
+      <DependentUpon>fmaPOSItemInquiryForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPOSItemInquiryForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPOS_RemoveItemForm.Designer.vb">
+      <DependentUpon>fmaPOS_RemoveItemForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPOS_RemoveItemForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaDailyCashCountForm.Designer.vb">
+      <DependentUpon>fmaDailyCashCountForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaDailyCashCountForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPharmaSetupForm.Designer.vb">
+      <DependentUpon>fmaPharmaSetupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPharmaSetupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaMonthlySummaryReportForm.Designer.vb">
+      <DependentUpon>fmaMonthlySummaryReportForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaMonthlySummaryReportForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaTransactionDetailsForm.Designer.vb">
+      <DependentUpon>fmaTransactionDetailsForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaTransactionDetailsForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaTransactionMasterListForm.Designer.vb">
+      <DependentUpon>fmaTransactionMasterListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaTransactionMasterListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPointOfSaleForm.Designer.vb">
+      <DependentUpon>fmaPointOfSaleForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaPointOfSaleForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaInventoryReplenishmentForm.Designer.vb">
+      <DependentUpon>fmaInventoryReplenishmentForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaInventoryReplenishmentForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaItemSetupForm.Designer.vb">
+      <DependentUpon>fmaItemSetupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaItemSetupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaItemListForm.Designer.vb">
+      <DependentUpon>fmaItemListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaItemListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaSuppliesCustodianListForm.Designer.vb">
+      <DependentUpon>fmaSuppliesCustodianListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaSuppliesCustodianListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaSuppliesCustodianSetupForm.Designer.vb">
+      <DependentUpon>fmaSuppliesCustodianSetupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaSuppliesCustodianSetupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaUnitsTypeListForm.Designer.vb">
+      <DependentUpon>fmaUnitsTypeListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaUnitsTypeListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaUnitsTypeSetupForm.Designer.vb">
+      <DependentUpon>fmaUnitsTypeSetupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaUnitsTypeSetupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaUserSetupForm.Designer.vb">
+      <DependentUpon>fmaUserSetupForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaUserSetupForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\fmaUserSetupViewerListForm.Designer.vb">
+      <DependentUpon>fmaUserSetupViewerListForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\fmaUserSetupViewerListForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\frmAttacheFile.Designer.vb">
+      <DependentUpon>frmAttacheFile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\frmAttacheFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\MasterDetails.Designer.vb">
+      <DependentUpon>MasterDetails.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\MasterDetails.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="01SetupForms\OpenFileEditor.Designer.vb">
+      <DependentUpon>OpenFileEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="01SetupForms\OpenFileEditor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="02Classes\attach_file.vb" />
+    <Compile Include="02Classes\clsData.vb" />
+    <Compile Include="02Classes\clsDBConnection.vb" />
+    <Compile Include="02Classes\clsEmpAttendance.vb" />
+    <Compile Include="02Classes\clsRPTValue.vb" />
+    <Compile Include="02Classes\clsSQLGeneric.vb" />
+    <Compile Include="02Classes\Effect.vb" />
+    <Compile Include="02Classes\IssuedCharging.vb" />
+    <Compile Include="02Classes\IssuedPatient.vb" />
+    <Compile Include="02Classes\item_received.vb" />
+    <Compile Include="02Classes\Monthly_Inventory.vb" />
+    <Compile Include="02Classes\mySkin.vb" />
+    <Compile Include="02Classes\patient_transaction_trace.vb" />
+    <Compile Include="02Classes\price_available.vb" />
+    <Compile Include="02Classes\procured_medicine.vb" />
+    <Compile Include="02Classes\pr_items.vb" />
+    <Compile Include="02Classes\stock_card.vb" />
+    <Compile Include="03Module\modCommon.vb" />
+    <Compile Include="03Module\SW_Mod.vb" />
+    <Compile Include="modelDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>modelDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="modelDataSet.vb">
+      <DependentUpon>modelDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Reports\rptMonthlyDeliveryPullOut.Designer.vb">
+      <DependentUpon>rptMonthlyDeliveryPullOut.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rptMonthlyDeliveryPullOut.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rptMonthlySalesReport.Designer.vb">
+      <DependentUpon>rptMonthlySalesReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rptMonthlySalesReport.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rptMonthlySummaryIssuance_Balances.Designer.vb">
+      <DependentUpon>rptMonthlySummaryIssuance_Balances.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rptMonthlySummaryIssuance_Balances.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rptSummarizedIssuance_Balances.Designer.vb">
+      <DependentUpon>rptSummarizedIssuance_Balances.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rptSummarizedIssuance_Balances.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_dailyCashCount.Designer.vb">
+      <DependentUpon>rpt_dailyCashCount.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_dailyCashCount.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_DailyInventory_Add_Sold.Designer.vb">
+      <DependentUpon>rpt_DailyInventory_Add_Sold.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_DailyInventory_Add_Sold.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_DailyRpt_MedicineIssuance_ChargingSummary.Designer.vb">
+      <DependentUpon>rpt_DailyRpt_MedicineIssuance_ChargingSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_DailyRpt_MedicineIssuance_ChargingSummary.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_DailyRpt_Medicine_Issuance.Designer.vb">
+      <DependentUpon>rpt_DailyRpt_Medicine_Issuance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_DailyRpt_Medicine_Issuance.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_DailyRpt_Medicine_Issuance_Consignee.Designer.vb">
+      <DependentUpon>rpt_DailyRpt_Medicine_Issuance_Consignee.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_DailyRpt_Medicine_Issuance_Consignee.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_DailySalesItemRange.Designer.vb">
+      <DependentUpon>rpt_DailySalesItemRange.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_DailySalesItemRange.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_DailySalesReport.Designer.vb">
+      <DependentUpon>rpt_DailySalesReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_DailySalesReport.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_DailySalesReportItem.Designer.vb">
+      <DependentUpon>rpt_DailySalesReportItem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_DailySalesReportItem.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_DailyTransactionReport.Designer.vb">
+      <DependentUpon>rpt_DailyTransactionReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_DailyTransactionReport.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_ActualInventoryReport.Designer.vb">
+      <DependentUpon>rpt_ActualInventoryReport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_ActualInventoryReport.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_InventoryCountPerSupplier.Designer.vb">
+      <DependentUpon>rpt_InventoryCountPerSupplier.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_InventoryCountPerSupplier.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_InventoryCountPerSupplierFundsClass.Designer.vb">
+      <DependentUpon>rpt_InventoryCountPerSupplierFundsClass.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_InventoryCountPerSupplierFundsClass.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_MedDispensedPerPatient.Designer.vb">
+      <DependentUpon>rpt_MedDispensedPerPatient.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_MedDispensedPerPatient.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_MonthlyActualInventoryFundClassification.Designer.vb">
+      <DependentUpon>rpt_MonthlyActualInventoryFundClassification.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_MonthlyActualInventoryFundClassification.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_MonthlyActualInventoryPerSupplier.Designer.vb">
+      <DependentUpon>rpt_MonthlyActualInventoryPerSupplier.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_MonthlyActualInventoryPerSupplier.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_MonthlyIssuanceCountPerCharging.Designer.vb">
+      <DependentUpon>rpt_MonthlyIssuanceCountPerCharging.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_MonthlyIssuanceCountPerCharging.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_MonthlyMedicineIssuance_ChargingSummary.Designer.vb">
+      <DependentUpon>rpt_MonthlyMedicineIssuance_ChargingSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_MonthlyMedicineIssuance_ChargingSummary.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_MonthlyMedicineIssuance_MAPFormat.Designer.vb">
+      <DependentUpon>rpt_MonthlyMedicineIssuance_MAPFormat.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_MonthlyMedicineIssuance_MAPFormat.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_MonthlyPatientCountPerCharging.Designer.vb">
+      <DependentUpon>rpt_MonthlyPatientCountPerCharging.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_MonthlyPatientCountPerCharging.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_MonthlySummarizedTotal.Designer.vb">
+      <DependentUpon>rpt_MonthlySummarizedTotal.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_MonthlySummarizedTotal.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_PurchaseRequest.Designer.vb">
+      <DependentUpon>rpt_PurchaseRequest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_PurchaseRequest.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_ReceiptHeader.Designer.vb">
+      <DependentUpon>rpt_ReceiptHeader.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_ReceiptHeader.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_StockCardHeaderPrint.Designer.vb">
+      <DependentUpon>rpt_StockCardHeaderPrint.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_StockCardHeaderPrint.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_TargetTimeliness.Designer.vb">
+      <DependentUpon>rpt_TargetTimeliness.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_TargetTimeliness.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpt_tr_barcode.Designer.vb">
+      <DependentUpon>rpt_tr_barcode.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rpt_tr_barcode.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\subrpt_SummarizedBalance.Designer.vb">
+      <DependentUpon>subrpt_SummarizedBalance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\subrpt_SummarizedBalance.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\XtraReport\Monthly Inventory\xtrMonthlyActualInvenytory.Designer.vb">
+      <DependentUpon>xtrMonthlyActualInvenytory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\XtraReport\Monthly Inventory\xtrMonthlyActualInvenytory.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\XtraReport\Patient Tanscation Monitoring\xtrSubReport_PatientDetails.Designer.vb">
+      <DependentUpon>xtrSubReport_PatientDetails.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\XtraReport\Patient Tanscation Monitoring\xtrSubReport_PatientDetails.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\XtraReport\Summary of Issued Patient and Charging\xtrSummaryIssuedCharging.Designer.vb">
+      <DependentUpon>xtrSummaryIssuedCharging.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\XtraReport\Summary of Issued Patient and Charging\xtrSummaryIssuedCharging.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\XtraReport\xtrListOfConsignedMedicines.Designer.vb">
+      <DependentUpon>xtrListOfConsignedMedicines.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\XtraReport\xtrListOfConsignedMedicines.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\XtraReport\xtrListOfPatientPerCharging.Designer.vb">
+      <DependentUpon>xtrListOfPatientPerCharging.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\XtraReport\xtrListOfPatientPerCharging.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\XtraReport\xtrMonthlyConsumption.Designer.vb">
+      <DependentUpon>xtrMonthlyConsumption.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\XtraReport\xtrMonthlyConsumption.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\XtraReport\Patient Tanscation Monitoring\xtrPatientTransactionMonitoring.Designer.vb">
+      <DependentUpon>xtrPatientTransactionMonitoring.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\XtraReport\Patient Tanscation Monitoring\xtrPatientTransactionMonitoring.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\XtraReport\xtrPriceOfAvailable.Designer.vb">
+      <DependentUpon>xtrPriceOfAvailable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\XtraReport\xtrPriceOfAvailable.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\XtraReport\xtrProcurementList.Designer.vb">
+      <DependentUpon>xtrProcurementList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\XtraReport\xtrProcurementList.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\XtraReport\xtrStockCard.Designer.vb">
+      <DependentUpon>xtrStockCard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\XtraReport\xtrStockCard.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\XtraReport\Summary of Issued Patient and Charging\xtrSummaryIssuedMedicinePerPatientCharging.Designer.vb">
+      <DependentUpon>xtrSummaryIssuedMedicinePerPatientCharging.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\XtraReport\Summary of Issued Patient and Charging\xtrSummaryIssuedMedicinePerPatientCharging.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\XtraReport\xtrSummaryOfTimeliness.Designer.vb">
+      <DependentUpon>xtrSummaryOfTimeliness.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\XtraReport\xtrSummaryOfTimeliness.vb">
+      <SubType>Component</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="00MainForms\About.resx">
+      <DependentUpon>About.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="00MainForms\ArkAntSoftSplashScreen.resx">
+      <DependentUpon>ArkAntSoftSplashScreen.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="00MainForms\fmaDateRange_DailyViewer.resx">
+      <DependentUpon>fmaDateRange_DailyViewer.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="00MainForms\fmaInventoryDialog.resx">
+      <DependentUpon>fmaInventoryDialog.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="00MainForms\fmaReport_DailyForm.resx">
+      <DependentUpon>fmaReport_DailyForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="00MainForms\fmaReturnedItemDialog.resx">
+      <DependentUpon>fmaReturnedItemDialog.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="00MainForms\fmzNumericKeysForm.resx">
+      <DependentUpon>fmzNumericKeysForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="00MainForms\frmCompanyProfileSetup.resx">
+      <DependentUpon>frmCompanyProfileSetup.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="00MainForms\frmSU_Pass.resx">
+      <DependentUpon>frmSU_Pass.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="00MainForms\ftDatabaseConnectionForm.resx">
+      <DependentUpon>ftDatabaseConnectionForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="00MainForms\ftLoginForm.resx">
+      <DependentUpon>ftLoginForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="00MainForms\ftmdiMainForm.resx">
+      <DependentUpon>ftmdiMainForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="00MainForms\fzzReportViewerForm.resx">
+      <DependentUpon>fzzReportViewerForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="00MainForms\Mainloading.resx">
+      <DependentUpon>Mainloading.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="00MainForms\progressDialog.resx">
+      <DependentUpon>progressDialog.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="00MainForms\ShowLoading.resx">
+      <DependentUpon>ShowLoading.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="00MainForms\xtrMainForm.resx">
+      <DependentUpon>xtrMainForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaGeneralServicesListofMed.resx">
+      <DependentUpon>fmaGeneralServicesListofMed.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\DotNetBar\DevComponentsControls.resx">
+      <DependentUpon>DevComponentsControls.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaItemIssuanceList.resx">
+      <DependentUpon>fmaItemIssuanceList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaItemViewDiscription.resx">
+      <DependentUpon>fmaItemViewDiscription.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaPatientMonitoringList.resx">
+      <DependentUpon>fmaPatientMonitoringList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaPriceAvailableListForm.resx">
+      <DependentUpon>fmaPriceAvailableListForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaPRListForm.resx">
+      <DependentUpon>fmaPRListForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaProcurementListForm.resx">
+      <DependentUpon>fmaProcurementListForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaPurchaseRequestSetupForm.resx">
+      <DependentUpon>fmaPurchaseRequestSetupForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaReceivedByPopUpForm.resx">
+      <DependentUpon>fmaReceivedByPopUpForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaReOrdeingPointList.resx">
+      <DependentUpon>fmaReOrdeingPointList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaRISListForm.resx">
+      <DependentUpon>fmaRISListForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaRISSetupForm.resx">
+      <DependentUpon>fmaRISSetupForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaInventoryCountPerSupplierListForm.resx">
+      <DependentUpon>fmaInventoryCountPerSupplierListForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaMonthlyInventoryPerSupplierListForm.resx">
+      <DependentUpon>fmaMonthlyInventoryPerSupplierListForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaReplinishmentListForm.resx">
+      <DependentUpon>fmaReplinishmentListForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaReplinishmentSetupForm.resx">
+      <DependentUpon>fmaReplinishmentSetupForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaIssuanceSummarySheetForm.resx">
+      <DependentUpon>fmaIssuanceSummarySheetForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaStockCardForm.resx">
+      <DependentUpon>fmaStockCardForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaStorageLocationListForm.resx">
+      <DependentUpon>fmaStorageLocationListForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaStorageLocationSetupForm.resx">
+      <DependentUpon>fmaStorageLocationSetupForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaSupplierMasterListForm.resx">
+      <DependentUpon>fmaSupplierMasterListForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaSupplierSetupForm.resx">
+      <DependentUpon>fmaSupplierSetupForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaTimelinessForm.resx">
+      <DependentUpon>fmaTimelinessForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaUpdateBegBalForm.resx">
+      <DependentUpon>fmaUpdateBegBalForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaWardListForm.resx">
+      <DependentUpon>fmaWardListForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaWardSetupForm.resx">
+      <DependentUpon>fmaWardSetupForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaPersonProfileListForm.resx">
+      <DependentUpon>fmaPersonProfileListForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaPersonProfileSetupForm.resx">
+      <DependentUpon>fmaPersonProfileSetupForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaPatientTypeMasterListForm.resx">
+      <DependentUpon>fmaPatientTypeMasterListForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaPatientTypeMasterSetupForm.resx">
+      <DependentUpon>fmaPatientTypeMasterSetupForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaMedicineIssuanceForm.resx">
+      <DependentUpon>fmaMedicineIssuanceForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaCloseTransactionDayDlg.resx">
+      <DependentUpon>fmaCloseTransactionDayDlg.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaMedTypeListForm.resx">
+      <DependentUpon>fmaMedTypeListForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaMedTypeSetupForm.resx">
+      <DependentUpon>fmaMedTypeSetupForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaMonthlySalesReportForm.resx">
+      <DependentUpon>fmaMonthlySalesReportForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaPharmaMasterListForm.resx">
+      <DependentUpon>fmaPharmaMasterListForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaInventoryMasterListForm.resx">
+      <DependentUpon>fmaInventoryMasterListForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaInventoryMasterSetupForm.resx">
+      <DependentUpon>fmaInventoryMasterSetupForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaPOSItemInquiryForm.resx">
+      <DependentUpon>fmaPOSItemInquiryForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaPOS_RemoveItemForm.resx">
+      <DependentUpon>fmaPOS_RemoveItemForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaDailyCashCountForm.resx">
+      <DependentUpon>fmaDailyCashCountForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaPharmaSetupForm.resx">
+      <DependentUpon>fmaPharmaSetupForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaMonthlySummaryReportForm.resx">
+      <DependentUpon>fmaMonthlySummaryReportForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaTransactionDetailsForm.resx">
+      <DependentUpon>fmaTransactionDetailsForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaTransactionMasterListForm.resx">
+      <DependentUpon>fmaTransactionMasterListForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaPointOfSaleForm.resx">
+      <DependentUpon>fmaPointOfSaleForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaInventoryReplenishmentForm.resx">
+      <DependentUpon>fmaInventoryReplenishmentForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaItemSetupForm.resx">
+      <DependentUpon>fmaItemSetupForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaItemListForm.resx">
+      <DependentUpon>fmaItemListForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaSuppliesCustodianListForm.resx">
+      <DependentUpon>fmaSuppliesCustodianListForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaSuppliesCustodianSetupForm.resx">
+      <DependentUpon>fmaSuppliesCustodianSetupForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaUnitsTypeListForm.resx">
+      <DependentUpon>fmaUnitsTypeListForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaUnitsTypeSetupForm.resx">
+      <DependentUpon>fmaUnitsTypeSetupForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaUserSetupForm.resx">
+      <DependentUpon>fmaUserSetupForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\fmaUserSetupViewerListForm.resx">
+      <DependentUpon>fmaUserSetupViewerListForm.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\frmAttacheFile.resx">
+      <DependentUpon>frmAttacheFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\MasterDetails.resx">
+      <DependentUpon>MasterDetails.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="01SetupForms\OpenFileEditor.resx">
+      <DependentUpon>OpenFileEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\licenses.licx" />
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptMonthlyDeliveryPullOut.resx">
+      <DependentUpon>rptMonthlyDeliveryPullOut.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptMonthlySalesReport.resx">
+      <DependentUpon>rptMonthlySalesReport.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptMonthlySummaryIssuance_Balances.resx">
+      <DependentUpon>rptMonthlySummaryIssuance_Balances.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptSummarizedIssuance_Balances.resx">
+      <DependentUpon>rptSummarizedIssuance_Balances.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_dailyCashCount.resx">
+      <DependentUpon>rpt_dailyCashCount.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_DailyInventory_Add_Sold.resx">
+      <DependentUpon>rpt_DailyInventory_Add_Sold.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_DailyRpt_MedicineIssuance_ChargingSummary.resx">
+      <DependentUpon>rpt_DailyRpt_MedicineIssuance_ChargingSummary.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_DailyRpt_Medicine_Issuance.resx">
+      <DependentUpon>rpt_DailyRpt_Medicine_Issuance.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_DailyRpt_Medicine_Issuance_Consignee.resx">
+      <DependentUpon>rpt_DailyRpt_Medicine_Issuance_Consignee.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_DailySalesItemRange.resx">
+      <DependentUpon>rpt_DailySalesItemRange.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_DailySalesReport.resx">
+      <DependentUpon>rpt_DailySalesReport.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_DailySalesReportItem.resx">
+      <DependentUpon>rpt_DailySalesReportItem.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_DailyTransactionReport.resx">
+      <DependentUpon>rpt_DailyTransactionReport.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_ActualInventoryReport.resx">
+      <DependentUpon>rpt_ActualInventoryReport.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_InventoryCountPerSupplier.resx">
+      <DependentUpon>rpt_InventoryCountPerSupplier.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_InventoryCountPerSupplierFundsClass.resx">
+      <DependentUpon>rpt_InventoryCountPerSupplierFundsClass.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_MedDispensedPerPatient.resx">
+      <DependentUpon>rpt_MedDispensedPerPatient.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_MonthlyActualInventoryFundClassification.resx">
+      <DependentUpon>rpt_MonthlyActualInventoryFundClassification.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_MonthlyActualInventoryPerSupplier.resx">
+      <DependentUpon>rpt_MonthlyActualInventoryPerSupplier.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_MonthlyIssuanceCountPerCharging.resx">
+      <DependentUpon>rpt_MonthlyIssuanceCountPerCharging.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_MonthlyMedicineIssuance_ChargingSummary.resx">
+      <DependentUpon>rpt_MonthlyMedicineIssuance_ChargingSummary.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_MonthlyMedicineIssuance_MAPFormat.resx">
+      <DependentUpon>rpt_MonthlyMedicineIssuance_MAPFormat.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_MonthlyPatientCountPerCharging.resx">
+      <DependentUpon>rpt_MonthlyPatientCountPerCharging.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_MonthlySummarizedTotal.resx">
+      <DependentUpon>rpt_MonthlySummarizedTotal.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_PurchaseRequest.resx">
+      <DependentUpon>rpt_PurchaseRequest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_ReceiptHeader.resx">
+      <DependentUpon>rpt_ReceiptHeader.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_StockCardHeaderPrint.resx">
+      <DependentUpon>rpt_StockCardHeaderPrint.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_TargetTimeliness.resx">
+      <DependentUpon>rpt_TargetTimeliness.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rpt_tr_barcode.resx">
+      <DependentUpon>rpt_tr_barcode.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\subrpt_SummarizedBalance.resx">
+      <DependentUpon>subrpt_SummarizedBalance.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\XtraReport\Monthly Inventory\xtrMonthlyActualInvenytory.resx">
+      <DependentUpon>xtrMonthlyActualInvenytory.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\XtraReport\Patient Tanscation Monitoring\xtrSubReport_PatientDetails.resx">
+      <DependentUpon>xtrSubReport_PatientDetails.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\XtraReport\Summary of Issued Patient and Charging\xtrSummaryIssuedCharging.resx">
+      <DependentUpon>xtrSummaryIssuedCharging.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\XtraReport\xtrListOfConsignedMedicines.resx">
+      <DependentUpon>xtrListOfConsignedMedicines.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\XtraReport\xtrListOfPatientPerCharging.resx">
+      <DependentUpon>xtrListOfPatientPerCharging.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\XtraReport\xtrMonthlyConsumption.resx">
+      <DependentUpon>xtrMonthlyConsumption.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\XtraReport\Patient Tanscation Monitoring\xtrPatientTransactionMonitoring.resx">
+      <DependentUpon>xtrPatientTransactionMonitoring.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\XtraReport\xtrPriceOfAvailable.resx">
+      <DependentUpon>xtrPriceOfAvailable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\XtraReport\xtrProcurementList.resx">
+      <DependentUpon>xtrProcurementList.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\XtraReport\xtrStockCard.resx">
+      <DependentUpon>xtrStockCard.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\XtraReport\Summary of Issued Patient and Charging\xtrSummaryIssuedMedicinePerPatientCharging.resx">
+      <DependentUpon>xtrSummaryIssuedMedicinePerPatientCharging.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\XtraReport\xtrSummaryOfTimeliness.resx">
+      <DependentUpon>xtrSummaryOfTimeliness.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="modelDataSet.xsc">
+      <DependentUpon>modelDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="modelDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>modelDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="modelDataSet.xss">
+      <DependentUpon>modelDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\DataSources\IssuedCharging.datasource" />
+    <None Include="My Project\DataSources\IssuedPatient.datasource" />
+    <None Include="My Project\DataSources\item_received.datasource" />
+    <None Include="My Project\DataSources\Monthly_Inventory.datasource" />
+    <None Include="My Project\DataSources\patient_transaction_trace.datasource" />
+    <None Include="My Project\DataSources\price_available.datasource">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="My Project\DataSources\procured_medicine.datasource" />
+    <None Include="My Project\DataSources\stock_card.datasource" />
+    <None Include="My Project\DataSources\stock_card1.datasource" />
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\Settings-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tools-icon32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\custom-reports-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Settings-icon1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Inventory-maintenance-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Button-Add-ico48n.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zoom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Print_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backgroundImage.jpg" />
+    <None Include="Resources\Actions-document-edit-icon.png" />
+    <Content Include="ant_ark_finalLogo copy.ico" />
+    <Content Include="arkant2.ico" />
+    <None Include="Resources\7days-32.png" />
+    <Content Include="arkant_ecs_new.ico" />
+    <Content Include="arkant_new_ecs_logo.ico" />
+    <Content Include="mssqlsystemresource.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="mssqlsystemresource_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>mssqlsystemresource.mdf</DependentUpon>
+    </Content>
+    <Content Include="Resources\ant_ark_finalLogo copy.png" />
+    <None Include="Resources\Blocnote-48.png" />
+    <None Include="Resources\Configuration256X256.png" />
+    <None Include="Resources\Bag_Icon_48.png" />
+    <None Include="Resources\user.png" />
+    <None Include="Resources\report.png" />
+    <None Include="Resources\System_Package_Icon_128.png" />
+    <None Include="Resources\httpzcoolcomcnpicpngpng_7906png.png" />
+    <None Include="Resources\arkant_bg_black.jpg" />
+    <None Include="Resources\black.jpg" />
+    <None Include="Resources\Car-Items-icon.png" />
+    <None Include="Resources\Location-icon.png" />
+    <None Include="Resources\green_bg.jpg" />
+    <None Include="Resources\orange_bg.jpg" />
+    <None Include="Resources\mint_bg.jpg" />
+    <None Include="Resources\I4LdK.gif" />
+    <None Include="Resources\arkant_bg.jpg" />
+    <None Include="Resources\Text-Edit-icon32.png" />
+    <None Include="Resources\back.png" />
+    <None Include="Resources\id-card-icon.png" />
+    <None Include="Resources\payment-icon.png" />
+    <None Include="Resources\coin-add-icon.png" />
+    <None Include="Resources\Shopping-Sale-icon.png" />
+    <None Include="Resources\ant_ark_finalLogo copy1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Bytescout\" />
+    <Folder Include="DevExpress\UserSkins\" />
+    <Folder Include="SMS\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,3 @@
+﻿Public Class xtrSummaryIssuedMedicinePerPatientCharging
+
+End Class

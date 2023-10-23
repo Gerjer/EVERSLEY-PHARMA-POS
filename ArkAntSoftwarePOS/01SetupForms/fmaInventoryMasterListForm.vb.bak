@@ -1,0 +1,399 @@
+﻿Public Class fmaInventoryMasterListForm
+    Public FormControls As Collection
+    Dim MeData As New DataTable
+    Dim RECORDCOUNTER As Integer = 0
+
+    Public Event ADD_BUTTON_CLICK()
+    Public Event FORM_CLOSING()
+
+    Private TABLENAME As String = "inventory_master"
+
+    Private WithEvents SETUPFORM As fmaInventoryMasterSetupForm
+    Private WithEvents REPLENISHFORM As fmaInventoryReplenishmentForm = Nothing
+
+#Region "Viewers Info"
+    Private Sub Attach()
+
+
+        tdbViewer.DataSource = Nothing
+        Dim LimitValue As Integer = PgCount.Value
+
+
+        Dim SQL As String = "SELECT SysPK,a_code,a_name,uom,selling_price,storage_requirement,"
+        SQL += " method,method_id,generic_name,brand_name,manufacturer,indication,drug_interaction,item_reordercount, CASE WHEN is_deleted= 0 THEN 'ACTIVE'"
+        SQL += " ELSE 'IN-ACTIVE'"
+        SQL += " END AS 'is_deleted'"
+
+        SQL += " FROM " & TABLENAME
+        SQL += " ORDER BY a_name "
+        If CheckBoxShowALl.Checked = False Then
+            SQL += String.Format(" LIMIT {0},{1}", 0, LimitValue)
+        End If
+
+
+        MeData = clsDBConn.ExecQuery(SQL)
+        Me.tdbViewer.DataSource = MeData
+        Me.tdbViewer.Rebind(True)
+
+        Try
+            With tdbViewer.Splits(0)
+                .DisplayColumns("SysPK").Visible = False
+                '.DisplayColumns("a_code").Visible = False
+
+                .DisplayColumns("a_code").DataColumn.Caption = "ITEM CODE"
+                .DisplayColumns("a_code").Width = 100
+                .DisplayColumns("a_code").HeadingStyle.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Center
+                .DisplayColumns("a_code").Style.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Near
+
+
+                .DisplayColumns("a_name").DataColumn.Caption = "ITEM NAME"
+                .DisplayColumns("a_name").Width = 350
+                .DisplayColumns("a_name").HeadingStyle.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Center
+                .DisplayColumns("a_name").Style.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Near
+
+                .DisplayColumns("uom").DataColumn.Caption = "UNITS"
+                .DisplayColumns("uom").Width = 100
+                .DisplayColumns("uom").HeadingStyle.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Center
+                .DisplayColumns("uom").Style.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Center
+
+                .DisplayColumns("selling_price").DataColumn.Caption = "SELLING PRICE"
+                .DisplayColumns("selling_price").DataColumn.NumberFormat = "#,##0.00"
+                .DisplayColumns("selling_price").Width = 120
+                .DisplayColumns("selling_price").HeadingStyle.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Center
+                .DisplayColumns("selling_price").Style.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Far
+
+                .DisplayColumns("storage_requirement").DataColumn.Caption = "STORAGE REQUIRED"
+                .DisplayColumns("storage_requirement").Width = 200
+                .DisplayColumns("storage_requirement").HeadingStyle.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Center
+                .DisplayColumns("storage_requirement").Style.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Center
+
+                .DisplayColumns("method").DataColumn.Caption = "DOSAGE FORM"
+                .DisplayColumns("method").Width = 120
+                .DisplayColumns("method").HeadingStyle.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Center
+                .DisplayColumns("method").Style.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Center
+
+                .DisplayColumns("method_id").Visible = False
+
+                .DisplayColumns("generic_name").DataColumn.Caption = "GENERIC NAME"
+                .DisplayColumns("generic_name").Width = 150
+                .DisplayColumns("generic_name").HeadingStyle.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Center
+                .DisplayColumns("generic_name").Style.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Near
+
+                .DisplayColumns("brand_name").DataColumn.Caption = "BRAND NAME"
+                .DisplayColumns("brand_name").Width = 150
+                .DisplayColumns("brand_name").HeadingStyle.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Center
+                .DisplayColumns("brand_name").Style.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Near
+
+                .DisplayColumns("manufacturer").DataColumn.Caption = "MANUFACTORER"
+                .DisplayColumns("manufacturer").Width = 220
+                .DisplayColumns("manufacturer").HeadingStyle.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Center
+                .DisplayColumns("manufacturer").Style.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Near
+
+                .DisplayColumns("indication").DataColumn.Caption = "INDICATION"
+                .DisplayColumns("indication").Width = 120
+                .DisplayColumns("indication").HeadingStyle.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Center
+                .DisplayColumns("indication").Style.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Near
+
+                .DisplayColumns("drug_interaction").DataColumn.Caption = "INTERACTION"
+                .DisplayColumns("drug_interaction").Width = 120
+                .DisplayColumns("drug_interaction").HeadingStyle.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Center
+                .DisplayColumns("drug_interaction").Style.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Near
+
+                .DisplayColumns("item_reordercount").DataColumn.Caption = "RE-ORDER LEVEL"
+                .DisplayColumns("item_reordercount").DataColumn.NumberFormat = "#,##0.00"
+                .DisplayColumns("item_reordercount").Width = 120
+                .DisplayColumns("item_reordercount").HeadingStyle.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Center
+                .DisplayColumns("item_reordercount").Style.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Far
+
+                .DisplayColumns("is_deleted").DataColumn.Caption = "STATUS"
+                .DisplayColumns("is_deleted").Width = 120
+                .DisplayColumns("is_deleted").HeadingStyle.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Center
+                .DisplayColumns("is_deleted").Style.HorizontalAlignment = C1.Win.C1TrueDBGrid.AlignHorzEnum.Center
+
+
+            End With
+        Catch ex As Exception
+
+        End Try
+
+        If MeData.Rows.Count > 0 Then
+            MeData = Nothing
+            SQL = "SELECT count(SysPK) as count"
+            SQL += " FROM " & TABLENAME
+            MeData = clsDBConn.ExecQuery(SQL)
+
+            recordCount.Text = "1-" & tdbViewer.RowCount & " of " & MeData.Rows(0).Item("count").ToString
+            RECORDCOUNTER = CInt(MeData.Rows(0).Item("count").ToString)
+        End If
+
+
+        MeData = Nothing
+
+    End Sub
+    Private Sub Detach()
+
+    End Sub
+#End Region
+
+    Private Sub fmaDepartmentViewerListForm_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+        'Me.Detach()
+        RaiseEvent FORM_CLOSING()
+    End Sub
+
+    Private Sub fmaDepartmentViewerListForm_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Me.Attach()
+    End Sub
+
+    'Private Sub tdbViewer_FilterChange(ByVal sender As Object, ByVal e As System.EventArgs) Handles tdbViewer.FilterChange
+    '    ' Build our filter expression.
+
+
+    '    Dim sb As New System.Text.StringBuilder()
+    '    Dim dc As C1.Win.C1TrueDBGrid.C1DataColumn
+
+    '    For Each dc In Me.tdbViewer.Columns
+
+    '        If dc.FilterText.Length > 0 Then
+
+    '            If sb.Length > 0 Then
+
+    '                sb.Append(" AND ")
+
+    '            End If
+    '            If Me.RadioButton1.Checked Then
+    '                sb.Append((dc.DataField + " = " + "'" + dc.FilterText + "'"))
+    '            Else
+    '                sb.Append((dc.DataField + " like " + "'%" + dc.FilterText + "%'"))
+    '            End If
+
+    '            Me.txtFilterText.Text = sb.ToString
+    '        End If
+
+    '    Next dc
+
+
+
+    'End Sub
+
+    
+
+    Private Sub GridToTextboxes()
+        For Each iControl As Control In FormControls
+            Try
+                iControl.Text = tdbViewer.Columns(iControl.Name.Replace("txt", "")).Text
+            Catch ex As Exception
+            End Try
+        Next
+        'Me.Close()
+    End Sub
+
+
+    Private Sub ToolStripMenuItem3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        Me.Close()
+    End Sub
+
+
+
+    Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClose.Click
+        Me.Close()
+    End Sub
+
+    
+
+    Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+        If SETUPFORM Is Nothing Then
+            SETUPFORM = New fmaInventoryMasterSetupForm
+            SETUPFORM.OPERATION = "ADD"
+        End If
+
+        SETUPFORM.ShowDialog()
+    End Sub
+
+    Private Sub SETUPFORM_DB_MODIFIED() Handles SETUPFORM.DB_MODIFIED
+        Attach()
+    End Sub
+
+    Private Sub SETUPFORM_Deactivate(ByVal sender As Object, ByVal e As System.EventArgs) Handles SETUPFORM.Deactivate
+        SETUPFORM.Show()
+        SETUPFORM.BringToFront()
+    End Sub
+
+
+    Private Sub SETUPFORM_SETUP_CLOSED() Handles SETUPFORM.SETUP_CLOSED
+        SETUPFORM = Nothing
+    End Sub
+
+    Private Sub PgCount_ValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles PgCount.ValueChanged
+        Attach()
+    End Sub
+
+    Private Sub btnRight_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRight.Click
+
+        txtFrom.Text = CInt(txtFrom.Text) + 10
+        txtTo.Text = CInt(txtFrom.Text) + 10
+
+    End Sub
+
+    
+
+
+    Private Sub tdbViewer_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles tdbViewer.MouseUp
+        Dim point1 As Point
+
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+
+            point1 = Windows.Forms.Cursor.Position
+
+            Dim pt As Point = tdbViewer.PointToClient(point1)
+            CMenuStripOperations.Show(tdbViewer, pt)
+        End If
+        If e.Button = Windows.Forms.MouseButtons.Left Then
+
+            btnDelete.Visible = True
+            btnEdit.Visible = True
+        End If
+
+    End Sub
+
+    Private Sub btnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
+        If MessageBox.Show("Are you sure you want to DELETE ITEM?", "Please Verify....", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
+            deleteSelectedItem()
+        End If
+    End Sub
+
+    Private Sub deleteSelectedItem()
+
+        Dim ITEMSYSPK As String = ""
+
+        Try
+            ITEMSYSPK = tdbViewer.Columns.Item(0).Value
+        Catch ex As Exception
+
+        End Try
+
+        If ITEMSYSPK <> "" Then
+            Dim DELETESTR As String = "DELETE FROM " & TABLENAME
+            DELETESTR += " WHERE SysPK='" & ITEMSYSPK & "'"
+
+            If clsDBConn.Execute(DELETESTR) Then
+                MsgBox("ITEM HAS BEEN DELETED", MsgBoxStyle.Information)
+                Attach()
+            End If
+        End If
+
+
+    End Sub
+
+
+    Private Sub btnEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEdit.Click
+        If SETUPFORM Is Nothing Then
+            SETUPFORM = New fmaInventoryMasterSetupForm
+            SETUPFORM.OPERATION = "EDIT"
+
+        End If
+
+
+        SETUPFORM.Show(Me)
+
+        SETUPFORM.BringToFront()
+        Me.FormControls = SETUPFORM.clsGroup.FormControls
+        SETUPFORM.btnModify.PerformClick()
+        GridToTextboxes()
+
+    End Sub
+
+    Private Sub btnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrint.Click
+        Dim SQLEX As String = "SELECT A.a_code, B.Item_Display, A.item_unit, A.item_buyprice, A.item_price, A.inv_qty, A.item_reordercount"
+        SQLEX += " FROM  inventory_master AS A"
+        SQLEX += " inner JOIN product_item B "
+        SQLEX += " ON (A.a_code = B.Item_Code)"
+        SQLEX += " GROUP BY a_code"
+        SQLEX += " ORDER BY B.Item_Display"
+
+
+        Dim new_report As New fzzReportViewerForm
+        Dim datefrom As String = Format(Date.Now, "yyyy-MM-dd")
+        Dim dateto As String = Format(Date.Now, "yyyy-MM-dd")
+
+        Me.Cursor = Cursors.WaitCursor
+        Try
+            new_report.AttachReport(SQLEX, "Inventory Report") = New rpt_ActualInventoryReport(datefrom, dateto)
+            new_report.Show()
+
+        Catch ex As Exception
+
+        End Try
+
+        Me.Cursor = Cursors.Default
+        'MsgBox("Please Close Drawer.")
+    End Sub
+
+  
+   
+    Private Sub DeleteSelectedToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DeleteSelectedToolStripMenuItem.Click
+        If MessageBox.Show("Are you sure you want to DELETE ITEM?", "Please Verify....", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
+            deleteSelectedItem()
+        End If
+    End Sub
+
+    Private Sub EditSelectedToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EditSelectedToolStripMenuItem.Click
+        If SETUPFORM Is Nothing Then
+            SETUPFORM = New fmaInventoryMasterSetupForm
+            SETUPFORM.OPERATION = "EDIT"
+        End If
+
+
+        SETUPFORM.Show(Me)
+
+        SETUPFORM.BringToFront()
+        Me.FormControls = SETUPFORM.clsGroup.FormControls
+        SETUPFORM.btnModify.PerformClick()
+        GridToTextboxes()
+    End Sub
+
+    Private Sub ReplinishToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReplinishToolStripMenuItem.Click
+
+        Dim GETTRD_SYSPK As String = "SELECT TRD_SYSPK from transaction_day "
+        GETTRD_SYSPK += " WHERE TransactionDay='" & Format(Date.Now, "yyyy-MM-dd") & "'"
+
+        Dim MeData As DataTable
+        MeData = clsDBConn.ExecQuery(GETTRD_SYSPK)
+
+        If Not MeData.Rows.Count > 0 Then
+            MsgBox("PLEASE CREATE TRANSACTION DAY FIRST BEFORE MAKING ITEM PULL-OUT OR DELIVERY.", MsgBoxStyle.Information)
+            Exit Sub
+        End If
+
+
+
+
+        If REPLENISHFORM Is Nothing Then
+            REPLENISHFORM = New fmaInventoryReplenishmentForm
+            REPLENISHFORM.OPERATION = "EDIT"
+        End If
+
+
+        With REPLENISHFORM
+            'SELECT SysPK,a_code,a_name, consignee, medtype, inv_qty, item_unit, item_buyprice, item_price,item_location, item_discount, item_reordercount 
+            .txtInvSys.Text = tdbViewer.Columns.Item("SysPK").Value
+            .txta_code.Text = tdbViewer.Columns.Item("a_code").Value
+            .txtconsignee.Text = tdbViewer.Columns.Item("consignee").Value
+            .txta_name.Text = tdbViewer.Columns.Item("a_name").Value
+            .txtRemStocks.Text = tdbViewer.Columns.Item("inv_qty").Value
+        End With
+
+        REPLENISHFORM.Show()
+        REPLENISHFORM.BringToFront()
+    End Sub
+
+    Private Sub REPLENISHFORM_SETUP_CLOSED() Handles REPLENISHFORM.SETUP_CLOSED
+        REPLENISHFORM = Nothing
+        Attach()
+    End Sub
+
+    Private Sub CheckBoxShowALl_CheckStateChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles CheckBoxShowALl.CheckStateChanged
+        Attach()
+    End Sub
+
+   
+End Class
