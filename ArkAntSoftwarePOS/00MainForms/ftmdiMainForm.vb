@@ -392,62 +392,6 @@ Public Class ftmdiMainForm
             closeDlg.ShowDialog()
 
 
-            'Dim SQLEX As String = "SELECT TransactionDay,day_stat FROM transaction_day "
-            'SQLEX += " WHERE TransactionDay='" & Format(Date.Now, "yyyy-MM-dd") & "'"
-            ''SQLEX += " AND Transaction_Type <> 'VOID'"
-            'Dim MeData As DataTable
-            'MeData = clsDBConn.ExecQuery(SQLEX)
-
-            'Dim status As String = ""
-
-            'If MeData.Rows.Count > 0 Then
-            '    status = MeData.Rows(0).Item("day_stat").ToString
-            'Else
-            '    MsgBox("Please Create Transaction Day for this Date." & vbNewLine & _
-            '           "Transactions->Create Transaction Day", MsgBoxStyle.Critical)
-            '    Exit Sub
-            'End If
-
-            'Dim netCashSales As Double = GET_DAILY_SALES()
-
-            ''If modCommon.GET_CASH_COUNT_AMOUNT <> modCommon.GET_DAILY_SALES Then
-            ''    MsgBox("Please Check Cash Count of the Day before Closing.", MsgBoxStyle.Exclamation)
-            ''    Exit Sub
-            ''End If
-
-            'If status = "OPEN" Then
-            '    If MessageBox.Show("Are you sure you want to CLOSE TRANSACTION DAY?" & vbNewLine & _
-            '                   "You Cannot make a Transaction after Closing", "Please verify....", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
-
-
-
-            '        Dim SQLUP As String = "UPDATE transaction_day SET day_stat='CLOSE', sales='" & netCashSales & "'"
-            '        SQLUP += " WHERE TransactionDay='" & Format(Date.Now, "yyyy-MM-dd") & "'"
-            '        SQLUP += " AND day_stat='OPEN'"
-            '        'SQLUP += " AND Transaction_Type <> 'VOID'"
-
-
-            '        If clsDBConn.Execute(SQLUP) Then
-
-            '            SQLUP = "UPDATE daily_sales_master"
-            '            SQLUP += " SET Transaction_Type='CLOSED'"
-            '            SQLUP += " WHERE DATE(dailysales_date)='" & Format(Date.Now, "yyyy-MM-dd") & "'"
-            '            SQLUP += " AND Transaction_Type <> 'VOID'"
-            '            If clsDBConn.Execute(SQLUP) Then
-
-            '                sendMail_DSR()
-
-            '                MsgBox("Transaction Day is Closed. You cannot do any transactions.", MsgBoxStyle.Information)
-            '            End If
-
-            '        End If
-
-
-            '    End If
-            'Else
-            '    MsgBox("Cannot Transaction Day is already Closed.", MsgBoxStyle.Critical)
-            'End If
-
 
 
         End If
