@@ -30,8 +30,12 @@ Partial Class fmaStockCardForm
         Me.ComboItem1 = New DevComponents.Editors.ComboItem()
         Me.GroupPanel2 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.GridControl1 = New DevExpress.XtraGrid.GridControl()
+        Me.CMenuStripOperations = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.DeleteSelectedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PrintStockCard = New System.Windows.Forms.ToolStripMenuItem()
         Me.GridView1 = New DevExpress.XtraGrid.Views.Grid.GridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblTimer = New DevComponents.DotNetBar.LabelX()
         Me.cmbItemCheck = New DevExpress.XtraEditors.CheckedComboBoxEdit()
         Me.PanelEx2 = New DevComponents.DotNetBar.PanelEx()
         Me.dateFrom = New DevComponents.Editors.DateTimeAdv.DateTimeInput()
@@ -57,13 +61,11 @@ Partial Class fmaStockCardForm
         Me.Button1 = New System.Windows.Forms.Button()
         Me.lblpercent = New DevComponents.DotNetBar.LabelX()
         Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
-        Me.CMenuStripOperations = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.DeleteSelectedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DeleteSelectedToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.GroupPanel2.SuspendLayout()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.CMenuStripOperations.SuspendLayout()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         CType(Me.cmbItemCheck.Properties, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -72,7 +74,6 @@ Partial Class fmaStockCardForm
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tdbViewer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
-        Me.CMenuStripOperations.SuspendLayout()
         Me.SuspendLayout()
         '
         'ComboItem4
@@ -128,6 +129,7 @@ Partial Class fmaStockCardForm
         '
         'GridControl1
         '
+        Me.GridControl1.ContextMenuStrip = Me.CMenuStripOperations
         Me.GridControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GridControl1.Location = New System.Drawing.Point(0, 199)
         Me.GridControl1.MainView = Me.GridView1
@@ -136,17 +138,51 @@ Partial Class fmaStockCardForm
         Me.GridControl1.TabIndex = 24
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
+        'CMenuStripOperations
+        '
+        Me.CMenuStripOperations.BackColor = System.Drawing.Color.PaleTurquoise
+        Me.CMenuStripOperations.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.CMenuStripOperations.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteSelectedToolStripMenuItem, Me.PrintStockCard})
+        Me.CMenuStripOperations.Name = "CMenuStripOperations"
+        Me.CMenuStripOperations.Size = New System.Drawing.Size(211, 56)
+        '
+        'DeleteSelectedToolStripMenuItem
+        '
+        Me.DeleteSelectedToolStripMenuItem.BackColor = System.Drawing.Color.Transparent
+        Me.DeleteSelectedToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DeleteSelectedToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.DeleteSelectedToolStripMenuItem.Name = "DeleteSelectedToolStripMenuItem"
+        Me.DeleteSelectedToolStripMenuItem.Size = New System.Drawing.Size(210, 26)
+        Me.DeleteSelectedToolStripMenuItem.Text = "Delete Selected"
+        Me.DeleteSelectedToolStripMenuItem.Visible = False
+        '
+        'PrintStockCard
+        '
+        Me.PrintStockCard.BackColor = System.Drawing.Color.Transparent
+        Me.PrintStockCard.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PrintStockCard.Name = "PrintStockCard"
+        Me.PrintStockCard.Size = New System.Drawing.Size(210, 26)
+        Me.PrintStockCard.Text = "Preview Stock Card"
+        '
         'GridView1
         '
-        Me.GridView1.Appearance.FocusedCell.BackColor = System.Drawing.Color.Transparent
-        Me.GridView1.Appearance.FocusedCell.ForeColor = System.Drawing.SystemColors.HighlightText
+        Me.GridView1.Appearance.FocusedCell.BackColor = System.Drawing.Color.Navy
+        Me.GridView1.Appearance.FocusedCell.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.GridView1.Appearance.FocusedCell.Options.UseBackColor = True
         Me.GridView1.Appearance.FocusedCell.Options.UseForeColor = True
-        Me.GridView1.Appearance.GroupRow.Font = New System.Drawing.Font("Tahoma", 10.0!)
+        Me.GridView1.Appearance.FocusedRow.BackColor = System.Drawing.Color.Navy
+        Me.GridView1.Appearance.FocusedRow.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.GridView1.Appearance.FocusedRow.Options.UseBackColor = True
+        Me.GridView1.Appearance.FocusedRow.Options.UseForeColor = True
+        Me.GridView1.Appearance.GroupRow.Font = New System.Drawing.Font("Tahoma", 10.0!, System.Drawing.FontStyle.Bold)
+        Me.GridView1.Appearance.GroupRow.FontStyleDelta = System.Drawing.FontStyle.Bold
         Me.GridView1.Appearance.GroupRow.Options.UseFont = True
+        Me.GridView1.Appearance.HeaderPanel.Font = New System.Drawing.Font("Tahoma", 10.0!)
+        Me.GridView1.Appearance.HeaderPanel.Options.UseFont = True
+        Me.GridView1.ColumnPanelRowHeight = 20
         Me.GridView1.GridControl = Me.GridControl1
         Me.GridView1.GroupFormat = "{1} "
-        Me.GridView1.GroupRowHeight = 15
+        Me.GridView1.GroupRowHeight = 25
         Me.GridView1.Name = "GridView1"
         Me.GridView1.OptionsBehavior.AutoExpandAllGroups = True
         Me.GridView1.OptionsBehavior.Editable = False
@@ -162,6 +198,7 @@ Partial Class fmaStockCardForm
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.Transparent
+        Me.GroupBox1.Controls.Add(Me.lblTimer)
         Me.GroupBox1.Controls.Add(Me.cmbItemCheck)
         Me.GroupBox1.Controls.Add(Me.PanelEx2)
         Me.GroupBox1.Controls.Add(Me.dateFrom)
@@ -188,6 +225,16 @@ Partial Class fmaStockCardForm
         Me.GroupBox1.TabIndex = 22
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "FILTER"
+        '
+        'lblTimer
+        '
+        Me.lblTimer.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTimer.Location = New System.Drawing.Point(1110, 96)
+        Me.lblTimer.Name = "lblTimer"
+        Me.lblTimer.Size = New System.Drawing.Size(32, 23)
+        Me.lblTimer.TabIndex = 252
+        Me.lblTimer.Text = "0"
+        Me.lblTimer.Visible = False
         '
         'cmbItemCheck
         '
@@ -591,33 +638,6 @@ Partial Class fmaStockCardForm
         Me.ProgressBar1.TabIndex = 0
         Me.ProgressBar1.Visible = False
         '
-        'CMenuStripOperations
-        '
-        Me.CMenuStripOperations.BackColor = System.Drawing.Color.PaleTurquoise
-        Me.CMenuStripOperations.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.CMenuStripOperations.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DeleteSelectedToolStripMenuItem, Me.DeleteSelectedToolStripMenuItem1})
-        Me.CMenuStripOperations.Name = "CMenuStripOperations"
-        Me.CMenuStripOperations.Size = New System.Drawing.Size(184, 56)
-        '
-        'DeleteSelectedToolStripMenuItem
-        '
-        Me.DeleteSelectedToolStripMenuItem.BackColor = System.Drawing.Color.Transparent
-        Me.DeleteSelectedToolStripMenuItem.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DeleteSelectedToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.DeleteSelectedToolStripMenuItem.Name = "DeleteSelectedToolStripMenuItem"
-        Me.DeleteSelectedToolStripMenuItem.Size = New System.Drawing.Size(183, 26)
-        Me.DeleteSelectedToolStripMenuItem.Text = "Delete Selected"
-        Me.DeleteSelectedToolStripMenuItem.Visible = False
-        '
-        'DeleteSelectedToolStripMenuItem1
-        '
-        Me.DeleteSelectedToolStripMenuItem1.BackColor = System.Drawing.Color.Transparent
-        Me.DeleteSelectedToolStripMenuItem1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DeleteSelectedToolStripMenuItem1.Name = "DeleteSelectedToolStripMenuItem1"
-        Me.DeleteSelectedToolStripMenuItem1.Size = New System.Drawing.Size(183, 26)
-        Me.DeleteSelectedToolStripMenuItem1.Text = "Edit Selected"
-        Me.DeleteSelectedToolStripMenuItem1.Visible = False
-        '
         'Timer1
         '
         Me.Timer1.Interval = 50
@@ -643,6 +663,7 @@ Partial Class fmaStockCardForm
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.GroupPanel2.ResumeLayout(False)
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.CMenuStripOperations.ResumeLayout(False)
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -653,7 +674,6 @@ Partial Class fmaStockCardForm
         CType(Me.tdbViewer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelEx1.ResumeLayout(False)
         Me.PanelEx1.PerformLayout()
-        Me.CMenuStripOperations.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -664,7 +684,7 @@ Partial Class fmaStockCardForm
     Friend WithEvents GroupPanel2 As DevComponents.DotNetBar.Controls.GroupPanel
     Friend WithEvents CMenuStripOperations As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents DeleteSelectedToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DeleteSelectedToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PrintStockCard As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents btnPrint As DevComponents.DotNetBar.ButtonX
     Friend WithEvents btnClose As DevComponents.DotNetBar.ButtonX
@@ -695,4 +715,5 @@ Partial Class fmaStockCardForm
     Friend WithEvents lblpercent As DevComponents.DotNetBar.LabelX
     Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
+    Friend WithEvents lblTimer As DevComponents.DotNetBar.LabelX
 End Class

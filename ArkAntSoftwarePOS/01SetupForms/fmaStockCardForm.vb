@@ -20,6 +20,7 @@ Public Class fmaStockCardForm
 
     Private Sub fmaMonthlyInventoryPerSupplierListForm_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+
         txtYear.Value = Date.Now.Year
         Dim months = System.Globalization.DateTimeFormatInfo.InvariantInfo.MonthNames
         dtpDateMonthof.DataSource = months
@@ -30,6 +31,7 @@ Public Class fmaStockCardForm
         loadHanler
 
     End Sub
+
 
     Private Sub loadHanler()
         AddHandler cmbItemCheck.Click, AddressOf cmbItemCheck_Click
@@ -400,11 +402,17 @@ Public Class fmaStockCardForm
     Private Sub btnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrint.Click
         ProgressBar1.Refresh()
         lblpercent.BackColor = System.Drawing.SystemColors.ControlLight
+
         If Not BackgroundWorker1.IsBusy = True Then
             ProgressBar1.Visible = True
             lblpercent.Visible = True
+            Cursor = Cursors.WaitCursor
+            Timer1.Start()
+            '  Timer1.Enabled = True
             BackgroundWorker1.RunWorkerAsync()
         End If
+
+
 
 #Region "old"
         'LoadBackGroundWorker()
@@ -612,6 +620,7 @@ Public Class fmaStockCardForm
 
 
     Private Sub LoadPrint(dt As DataTable)
+        Cursor = Cursors.WaitCursor
 
         For Each row As DataRow In dt.Rows
 
@@ -660,6 +669,7 @@ Public Class fmaStockCardForm
         ProgressBar1.Value = 0
         System.Threading.Thread.Sleep(300)
         dt = Nothing
+        Cursor = Cursors.Default
 
 
     End Sub
@@ -736,51 +746,34 @@ Public Class fmaStockCardForm
 
     End Function
 
-    Private Sub btnPrint_Enter(sender As Object, e As EventArgs)
-
-
-
-
-    End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
-        If ProgressBar1.Value <= ProgressBar1.Maximum - 1 Then
-            progressValue = (ctr * cnt) * ctrvalue
-            ProgressBar1.Value += progressValue
-        Else
-            If ProgressBar1.Value = 100 Then
-                Dim report As New xtrStockCard
-                report.DataSource = stock_card
-                report.PrintingSystem.Document.AutoFitToPagesWidth = 1
-                report.CreateDocument()
-                report.ShowPreview
-                stock_card.Clear()
-                ProgressBar1.Visible = False
-                Timer1.Enabled = False
-                ProgressBar1.Value = 1
-            End If
+        'wait 5 seconds for the background worker to be free
 
+        'Do While BackgroundWorker1.IsBusy AndAlso waitCount <= 5
+        '    BackgroundWorker1.WorkerSupportsCancellation = True
+        '    BackgroundWorker1.CancelAsync()     'tell the backgroundworker to stop
+        '    Threading.Thread.Sleep(1000) 'wait for 1 second
+        '    waitCount += 1
+        'Loop
 
+        If Not BackgroundWorker1.IsBusy = True Then
+            BackgroundWorker1.RunWorkerAsync()
         End If
+
+
 
     End Sub
 
-    Private Sub BackgroundWorker1_DoWork(sender As Object, e As DoWorkEventArgs) Handles BackgroundWorker1.DoWork
-
-        'For i = 0 To 100
-        '    If BackgroundWorker1.CancellationPending = True Then
-        '        e.Cancel = True
-        '    Else
-        '        DoHeavyWork()
-        '        BackgroundWorker1.ReportProgress(i)
-        '    End If
-        'Next
+    Public Sub BackgroundWorker1_DoWork(sender As Object, e As DoWorkEventArgs) Handles BackgroundWorker1.DoWork
 
 
-
+        'Timer1.Enabled = True
+        '     Timer1.Start()
 
         dt = getQueryStockCard(txtSupplierCode.Text, Format(Me.dateFrom.Value, "yyyy-MM-dd"), Format(Me.dateTo.Value, "yyyy-MM-dd"), ListItem)
+
         For i = 1 To ProgressBar1.Maximum
 
             If BackgroundWorker1.CancellationPending = True Then
@@ -788,6 +781,7 @@ Public Class fmaStockCardForm
             Else
                 DoHeavyWork()
                 BackgroundWorker1.ReportProgress(i)
+      '          Timer1.Enabled = True
             End If
         Next
 
@@ -815,7 +809,9 @@ Public Class fmaStockCardForm
             MessageBox.Show(e.Error.Message)
         Else
             '    MessageBox.Show("Finished")
+            '      lblTimer.Text = 1
             LoadPrint(dt)
+
         End If
 
     End Sub
@@ -846,4 +842,81 @@ Public Class fmaStockCardForm
             Button2.PerformClick()
         End If
     End Sub
+
+    Dim item_code As String
+
+    Private Sub GridView1_RowCellClick(sender As Object, e As RowCellClickEventArgs) Handles GridView1.RowCellClick
+        Dim view As GridView = sender
+
+        Try
+
+            item_code = view.GetRowCellDisplayText(e.RowHandle, "a_code").ToString
+
+        Catch ex As Exception
+
+        End Try
+
+
+    End Sub
+
+    Private Sub PrintStockCard_Click(sender As Object, e As EventArgs) Handles PrintStockCard.Click
+
+
+        dt = getQueryStockCard(txtSupplierCode.Text, Format(Me.dateFrom.Value, "yyyy-MM-dd"), Format(Me.dateTo.Value, "yyyy-MM-dd"), item_code)
+
+
+        For Each row As DataRow In dt.Rows
+
+            Dim obj As New stock_card
+
+            '     If current_row > x Then
+
+            With obj
+                .item_name = If(IsDBNull(row("a_name").ToString), "", row("a_name").ToString)
+                .item_desc = If(IsDBNull(row("desc").ToString), "", row("desc").ToString)
+                .item_code = If(IsDBNull(row("a_code").ToString), "", row("a_code").ToString)
+                .price = If(IsDBNull(row("price")), "", row("price"))
+                .uom = If(IsDBNull(row("uom").ToString), "", row("uom").ToString)
+                .brand_name = If(IsDBNull(row("brand_name").ToString), "", row("brand_name").ToString)
+                .re_order_cnt = If(IsDBNull(row("item_reordercount").ToString), "", row("item_reordercount").ToString)
+                .clusster = If(IsDBNull(row("fund_cluster").ToString), "", row("fund_cluster").ToString)
+                .initial_qty = If(IsDBNull(row("initial_qty").ToString), 0, row("initial_qty").ToString)
+                '  .sold = If(IsDBNull(row("sold").ToString), 0, row("sold").ToString)
+                '  .pullout = If(IsDBNull(row("pullout").ToString), 0, row("pullout").ToString)
+                .balance_qty = If(IsDBNull(row("balance_qty").ToString), 0, row("balance_qty").ToString)
+                .reference = If(IsDBNull(row("reference").ToString), "", row("reference").ToString)
+                .date_transaction = If(IsDBNull(row("TRD_Date").ToString), 0, row("TRD_Date").ToString)
+                .soldpullout = If(IsDBNull(row("soldpullout").ToString), 0, row("soldpullout").ToString)
+            End With
+
+            '    End If
+
+            stock_card.Add(obj)
+
+            '   x += 1
+        Next
+
+
+        Dim report As New xtrStockCard
+
+        report.DataSource = stock_card
+        report.PrintingSystem.Document.AutoFitToPagesWidth = 1
+        report.CreateDocument()
+        report.ShowPreview
+        stock_card.Clear()
+
+        ProgressBar1.Visible = False
+        lblpercent.Visible = False
+        lblpercent.Text = ""
+
+        ProgressBar1.Value = 0
+        System.Threading.Thread.Sleep(300)
+        dt = Nothing
+        Cursor = Cursors.Default
+
+
+
+    End Sub
+
+
 End Class
