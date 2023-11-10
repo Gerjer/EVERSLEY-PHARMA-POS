@@ -1,4 +1,6 @@
-﻿Imports DevExpress.XtraGrid.Views.Grid
+﻿Imports DevExpress.XtraGrid.Views.BandedGrid
+Imports DevExpress.XtraGrid.Views.Base
+Imports DevExpress.XtraGrid.Views.Grid
 Imports DevExpress.XtraReports.UI
 
 Public Class fmaPriceAvailableListForm
@@ -25,12 +27,13 @@ Public Class fmaPriceAvailableListForm
 
 
     Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
-        If SETUPFORM Is Nothing Then
-            SETUPFORM = New fmaUnitsTypeSetupForm
-            SETUPFORM.OPERATION = "ADD"
-        End If
+        'If SETUPFORM Is Nothing Then
+        '    SETUPFORM = New fmaUnitsTypeSetupForm
+        '    SETUPFORM.OPERATION = "ADD"
+        'End If
 
-        SETUPFORM.ShowDialog()
+        'SETUPFORM.ShowDialog()
+        LoadList()
     End Sub
 
 
@@ -75,7 +78,7 @@ Public Class fmaPriceAvailableListForm
         dtpFrom.ShowUpDown = False
 
         LoadList()
-
+        allowedit(BandedGridView1, cbxAllowEdit.CheckState)
         FirstLoad = False
     End Sub
 
@@ -287,11 +290,11 @@ Public Class fmaPriceAvailableListForm
     End Sub
 
     Private Sub dtpFrom_ValueChanged(sender As Object, e As EventArgs) Handles dtpFrom.ValueChanged
-        LoadList()
+        '    LoadList()
     End Sub
 
     Private Sub dtpTo_ValueChanged(sender As Object, e As EventArgs) Handles dtpTo.ValueChanged
-        LoadList()
+        '    LoadList()
     End Sub
 
     Dim supplier_id As String = ""
@@ -372,6 +375,8 @@ Public Class fmaPriceAvailableListForm
 
     Private Sub btnPrint_Click(sender As Object, e As EventArgs) Handles btnPrint.Click
 
+        Cursor = Cursors.WaitCursor
+
         For i As Integer = 0 To BandedGridView1.DataRowCount - 1
 
             Dim obj As New price_available
@@ -388,6 +393,7 @@ Public Class fmaPriceAvailableListForm
         Next
 
 
+
         Dim report As New xtrPriceOfAvailable
         report.header.Text = date_name
         report.Report.DataSource = price_available
@@ -398,14 +404,15 @@ Public Class fmaPriceAvailableListForm
 
         price_available.Clear()
 
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub dtpFrom_KeyUp(sender As Object, e As KeyEventArgs) Handles dtpFrom.KeyUp
-        LoadList()
+        '      LoadList()
     End Sub
 
     Private Sub dtpTo_KeyUp(sender As Object, e As KeyEventArgs) Handles dtpTo.KeyUp
-        LoadList()
+        '     LoadList()
     End Sub
 
     Private Sub cxbxAll_CheckedChanged(sender As Object, e As EventArgs) Handles cxbxAll.CheckedChanged
@@ -452,4 +459,43 @@ Public Class fmaPriceAvailableListForm
             dtpTo.Enabled = True
         End If
     End Sub
+
+    Private Sub cbxAllowEdit_CheckedChanged(sender As Object, e As EventArgs) Handles cbxAllowEdit.CheckedChanged
+
+        allowedit(BandedGridView1, cbxAllowEdit.CheckState)
+
+
+    End Sub
+
+    Private Sub allowedit(bandedGridView1 As BandedGridView, CheckState As Integer)
+
+        For i As Integer = 0 To bandedGridView1.Columns.Count - 1
+            Select Case i
+                Case 2, 3, 4, 5
+                    If CheckState = 1 Then
+                        bandedGridView1.Columns(i).OptionsColumn.AllowEdit = True
+                    Else
+                        bandedGridView1.Columns(i).OptionsColumn.AllowEdit = False
+                    End If
+
+            End Select
+        Next
+
+
+    End Sub
+
+    Private Sub GridControl1_EditorKeyDown(sender As Object, e As KeyEventArgs) Handles GridControl1.EditorKeyDown
+        Dim view As GridView = DirectCast(TryCast(sender, DevExpress.XtraGrid.GridControl).FocusedView, GridView)
+
+        If e.KeyCode = Keys.Enter Then
+
+            If Not view.IsLastVisibleRow Then
+                view.MoveNext()
+            Else
+                view.MoveFirst()
+            End If
+        End If
+
+    End Sub
+
 End Class

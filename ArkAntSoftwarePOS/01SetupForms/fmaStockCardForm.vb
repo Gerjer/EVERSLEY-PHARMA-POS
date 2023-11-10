@@ -10,10 +10,13 @@ Imports DevExpress.XtraEditors.Repository
 Imports DevExpress.XtraGrid.Columns
 Imports DevExpress.XtraGrid.Views.Base
 Imports DevExpress.XtraGrid
-
+Imports System.Windows.Forms
+Imports System.Threading
+Imports System.Threading.Tasks
+Imports System.ComponentModel
 
 Public Class fmaStockCardForm
-
+    Private WithEvents Progress As Windows.Forms.ProgressBar
 
     Private Sub fmaMonthlyInventoryPerSupplierListForm_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
@@ -43,7 +46,7 @@ Public Class fmaStockCardForm
             Tag = 2
             Dim checkitem As Object = cmbItem.Properties.GetCheckedItems()
             ListItem = checkitem
-
+            displayItemInventory()
             cmbItem.ClosePopup()
 
             Try
@@ -108,7 +111,7 @@ Public Class fmaStockCardForm
         Dim SQLEX As String = "SELECT SysPK 'id',a_name 'name' FROM pharmaceuticals"
 
         Dim MeData As DataTable
-        MeData = clsDBConn.ExecQuery(SQLEX)
+        MeData = DataSource(SQLEX)
 
         If MeData.Rows.Count > 0 Then
             Try
@@ -199,7 +202,9 @@ Public Class fmaStockCardForm
             Exit Sub
         End If
 
-        Dim SQLEX As String = "SELECT TRD_Date,daily_inventory_details.initial_qty ,added,sold,pullout,remaining_qty,inventory_master.a_name,daily_inventory_details.a_code "
+        Dim SQLEX As String = "SELECT TRD_Date,daily_inventory_details.initial_qty ,added,sold,pullout,remaining_qty "
+        SQLEX += " ,CONCAT(inventory_master.a_name,' -(Php ',ris_details.price,')')'a_name'"
+        SQLEX += " ,daily_inventory_details.a_code"
         SQLEX += " FROM daily_inventory_details"
         SQLEX += " INNER JOIN inventory_master "
         SQLEX += " ON (daily_inventory_details.SysPK_InvMaster = inventory_master.SysPK)"
@@ -210,23 +215,21 @@ Public Class fmaStockCardForm
         SQLEX += " AND TRD_Date BETWEEN '" & Format(Me.dateFrom.Value, "yyyy-MM-dd") & "'"
         SQLEX += " AND '" & Format(Me.dateTo.Value, "yyyy-MM-dd") & "'"
         '     SQLEX += " AND daily_inventory_details.a_code='" & txtItemCode.Text & "'"
-        'SQLEX += " AND daily_inventory_details.a_code IN (" & ListItem & ")"
-        SQLEX += " ORDER BY a_name,TRD_Date"
+        SQLEX += " AND daily_inventory_details.a_code IN (" & ListItem & ")"
+        SQLEX += " ORDER BY a_code,a_name,TRD_Date"
 
         Dim MeData As DataTable
-        MeData = clsDBConn.ExecQuery(SQLEX)
+        MeData = DataSource(SQLEX)
 
         If MeData.Rows.Count > 0 Then
+            GridControl1.DataSource = Nothing
+            GridControl1.DataSource = MeData
+            DesignGridview(GridView1)
 
             Dim dt As DataTable = PopulateDatatable(MeData, CodeList)
 
-
-
             tdbViewer.DataSource = dt
             Me.tdbViewer.Rebind(True)
-
-            GridControl1.DataSource = dt
-            DesignGridview(GridView1)
 
 
             Try
@@ -329,6 +332,7 @@ Public Class fmaStockCardForm
         Next
 
         view.Columns("a_name").GroupIndex = 0
+        '    view.ClearSorting()
 
     End Sub
 
@@ -385,113 +389,277 @@ Public Class fmaStockCardForm
     Dim stock_card As New List(Of stock_card)
 
     Dim NewReport As Boolean = True
+    Dim ctr As Double = 0
+    Dim ctrvalue As Double = 0
+    Dim cnt As Integer = 0
+    Dim progressValue As Double = 0
+    Dim dt As DataTable
+
+
+
     Private Sub btnPrint_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPrint.Click
-
-        Cursor.Current = Cursors.WaitCursor
-
-        If NewReport = True Then
-
-            Try
-                Dim dt As New DataTable
-                dt = getQueryStockCard(txtSupplierCode.Text, Format(Me.dateFrom.Value, "yyyy-MM-dd"), Format(Me.dateTo.Value, "yyyy-MM-dd"), ListItem)
-
-                If dt.Rows.Count > 0 Then
-
-                    'Dim current_row As Integer = dt.Rows.Count
-                    'Dim default_row As Integer = 0
-                    'If current_row <= 36 Then
-                    '    default_row = 36 - current_row
-                    'End If
-
-                    'Dim dummy_dt As DataTable = dt.Copy
-
-                    'Dim cnt As Integer = 1
-                    'Do While default_row > cnt
-                    '    dummy_dt.Rows.Add()
-                    '    cnt += 1
-                    'Loop
-
-                    'dt = Nothing
-                    'dt = dummy_dt.Copy
-
-                    'Dim x As Integer = 0
-
-                    For Each row As DataRow In dt.Rows
-
-                        Dim obj As New stock_card
-
-                        '     If current_row > x Then
-
-                        With obj
-                            .item_name = If(IsDBNull(row("a_name").ToString), "", row("a_name").ToString)
-                            .item_desc = If(IsDBNull(row("desc").ToString), "", row("desc").ToString)
-                            .item_code = If(IsDBNull(row("a_code").ToString), "", row("a_code").ToString)
-                            .price = If(IsDBNull(row("price")), "", row("price"))
-                            .uom = If(IsDBNull(row("uom").ToString), "", row("uom").ToString)
-                            .brand_name = If(IsDBNull(row("brand_name").ToString), "", row("brand_name").ToString)
-                            .re_order_cnt = If(IsDBNull(row("item_reordercount").ToString), "", row("item_reordercount").ToString)
-                            .clusster = If(IsDBNull(row("fund_cluster").ToString), "", row("fund_cluster").ToString)
-                            .initial_qty = If(IsDBNull(row("initial_qty").ToString), 0, row("initial_qty").ToString)
-                            '  .sold = If(IsDBNull(row("sold").ToString), 0, row("sold").ToString)
-                            '  .pullout = If(IsDBNull(row("pullout").ToString), 0, row("pullout").ToString)
-                            .balance_qty = If(IsDBNull(row("balance_qty").ToString), 0, row("balance_qty").ToString)
-                            .reference = If(IsDBNull(row("reference").ToString), "", row("reference").ToString)
-                            .date_transaction = If(IsDBNull(row("TRD_Date").ToString), 0, row("TRD_Date").ToString)
-                            .soldpullout = If(IsDBNull(row("soldpullout").ToString), 0, row("soldpullout").ToString)
-                        End With
-
-                        '    End If
-
-                        stock_card.Add(obj)
-
-                        '   x += 1
-                    Next
-
-
-                    Dim report As New xtrStockCard
-
-                    report.DataSource = stock_card
-                    report.PrintingSystem.Document.AutoFitToPagesWidth = 1
-                    report.CreateDocument()
-                    report.ShowPreview
-                    stock_card.Clear()
-
-                End If
-            Catch ex As Exception
-
-            End Try
-
-
-        Else
-
-            Dim SQLEX As String = "SELECT TRD_Date,daily_inventory_details.initial_qty ,added,(sold + pullout) 'isspull',remaining_qty "
-            SQLEX += " ,inventory_master.consignee, inventory_master.a_name,inventory_master.a_code, inventory_master.item_unit  "
-            SQLEX += " ,inventory_master.item_reordercount, inventory_master.item_buyprice"
-            SQLEX += " FROM daily_inventory_details"
-            SQLEX += " INNER JOIN inventory_master "
-            SQLEX += " ON (daily_inventory_details.SysPK_InvMaster = inventory_master.SysPK)"
-            SQLEX += " INNER JOIN pharmaceuticals"
-            SQLEX += " ON (inventory_master.consignee_id = pharmaceuticals.SysPK)"
-            SQLEX += " WHERE pharmaceuticals.a_code='" & txtSupplierCode.Text & "'"
-            SQLEX += " AND TRD_Date BETWEEN '" & Format(Me.dateFrom.Value, "yyyy-MM-dd") & "'"
-            SQLEX += " AND '" & Format(Me.dateTo.Value, "yyyy-MM-dd") & "'"
-            SQLEX += " AND daily_inventory_details.a_code='" & txtItemCode.Text & "'"
-            SQLEX += " ORDER BY TRD_Date"
-
-            Dim new_report As New fzzReportViewerForm
-            Dim reportTitle As String = "STOCK CARD HEADER"
-
-            Try
-                new_report.AttachReport(SQLEX, reportTitle) = New rpt_StockCardHeaderPrint
-                new_report.Show()
-            Catch ex As Exception
-
-            End Try
-
-
+        ProgressBar1.Refresh()
+        lblpercent.BackColor = System.Drawing.SystemColors.ControlLight
+        If Not BackgroundWorker1.IsBusy = True Then
+            ProgressBar1.Visible = True
+            lblpercent.Visible = True
+            BackgroundWorker1.RunWorkerAsync()
         End If
 
-        Cursor.Current = Cursors.Default
+#Region "old"
+        'LoadBackGroundWorker()
+
+        'If GridView1.RowCount < 0 Then
+
+        '    Cursor = Cursors.WaitCursor
+
+
+        '    If NewReport = True Then
+
+        '        Try
+        '            Dim dt As New DataTable
+        '            'ProgressBar1.Visible = True
+        '            'Timer1.Enabled = True
+
+        '            ' ProgressBar1.Visible = True
+        '            ' Dim slowStuff = Task(Of Integer).Factory.StartNew(
+        '            'Function() ExceuteSlowStuff(AddressOf Me.ShowProgress))
+
+        '            'ProgressBar1.Visible = True
+        '            'bgw.WorkerReportsProgress = True
+        '            'bgw.RunWorkerAsync()
+
+
+        '            dt = getQueryStockCard(txtSupplierCode.Text, Format(Me.dateFrom.Value, "yyyy-MM-dd"), Format(Me.dateTo.Value, "yyyy-MM-dd"), ListItem)
+
+
+        '            If dt.Rows.Count > 0 Then
+        '                progressValue = 0
+        '                cnt = 1
+        '                ctr = dt.Rows.Count / 100
+        '                ctrvalue = 100 / dt.Rows.Count
+        '                'Dim current_row As Integer = dt.Rows.Count
+        '                'Dim default_row As Integer = 0
+        '                'If current_row <= 36 Then
+        '                '    default_row = 36 - current_row
+        '                'End If
+
+        '                'Dim dummy_dt As DataTable = dt.Copy
+
+        '                'Dim cnt As Integer = 1
+        '                'Do While default_row > cnt
+        '                '    dummy_dt.Rows.Add()
+        '                '    cnt += 1
+        '                'Loop
+
+        '                'dt = Nothing
+        '                'dt = dummy_dt.Copy
+
+        '                'Dim x As Integer = 0
+
+        '                For Each row As DataRow In dt.Rows
+
+        '                    Dim obj As New stock_card
+
+        '                    '     If current_row > x Then
+
+        '                    With obj
+        '                        .item_name = If(IsDBNull(row("a_name").ToString), "", row("a_name").ToString)
+        '                        .item_desc = If(IsDBNull(row("desc").ToString), "", row("desc").ToString)
+        '                        .item_code = If(IsDBNull(row("a_code").ToString), "", row("a_code").ToString)
+        '                        .price = If(IsDBNull(row("price")), "", row("price"))
+        '                        .uom = If(IsDBNull(row("uom").ToString), "", row("uom").ToString)
+        '                        .brand_name = If(IsDBNull(row("brand_name").ToString), "", row("brand_name").ToString)
+        '                        .re_order_cnt = If(IsDBNull(row("item_reordercount").ToString), "", row("item_reordercount").ToString)
+        '                        .clusster = If(IsDBNull(row("fund_cluster").ToString), "", row("fund_cluster").ToString)
+        '                        .initial_qty = If(IsDBNull(row("initial_qty").ToString), 0, row("initial_qty").ToString)
+        '                        '  .sold = If(IsDBNull(row("sold").ToString), 0, row("sold").ToString)
+        '                        '  .pullout = If(IsDBNull(row("pullout").ToString), 0, row("pullout").ToString)
+        '                        .balance_qty = If(IsDBNull(row("balance_qty").ToString), 0, row("balance_qty").ToString)
+        '                        .reference = If(IsDBNull(row("reference").ToString), "", row("reference").ToString)
+        '                        .date_transaction = If(IsDBNull(row("TRD_Date").ToString), 0, row("TRD_Date").ToString)
+        '                        .soldpullout = If(IsDBNull(row("soldpullout").ToString), 0, row("soldpullout").ToString)
+        '                    End With
+
+        '                    '    End If
+
+        '                    stock_card.Add(obj)
+
+        '                    '   x += 1
+        '                Next
+
+
+        '                Dim report As New xtrStockCard
+
+        '                report.DataSource = stock_card
+        '                report.PrintingSystem.Document.AutoFitToPagesWidth = 1
+        '                report.CreateDocument()
+        '                report.ShowPreview
+        '                stock_card.Clear()
+
+
+
+        '            End If
+        '        Catch ex As Exception
+
+        '        End Try
+
+
+        '    Else
+
+        '        Dim SQLEX As String = "SELECT TRD_Date,daily_inventory_details.initial_qty ,added,(sold + pullout) 'isspull',remaining_qty "
+        '        SQLEX += " ,inventory_master.consignee, inventory_master.a_name,inventory_master.a_code, inventory_master.item_unit  "
+        '        SQLEX += " ,inventory_master.item_reordercount, inventory_master.item_buyprice"
+        '        SQLEX += " FROM daily_inventory_details"
+        '        SQLEX += " INNER JOIN inventory_master "
+        '        SQLEX += " ON (daily_inventory_details.SysPK_InvMaster = inventory_master.SysPK)"
+        '        SQLEX += " INNER JOIN pharmaceuticals"
+        '        SQLEX += " ON (inventory_master.consignee_id = pharmaceuticals.SysPK)"
+        '        SQLEX += " WHERE pharmaceuticals.a_code='" & txtSupplierCode.Text & "'"
+        '        SQLEX += " AND TRD_Date BETWEEN '" & Format(Me.dateFrom.Value, "yyyy-MM-dd") & "'"
+        '        SQLEX += " AND '" & Format(Me.dateTo.Value, "yyyy-MM-dd") & "'"
+        '        SQLEX += " AND daily_inventory_details.a_code='" & txtItemCode.Text & "'"
+        '        SQLEX += " ORDER BY TRD_Date"
+
+        '        Dim new_report As New fzzReportViewerForm
+        '        Dim reportTitle As String = "STOCK CARD HEADER"
+
+        '        Try
+        '            new_report.AttachReport(SQLEX, reportTitle) = New rpt_StockCardHeaderPrint
+        '            new_report.Show()
+        '        Catch ex As Exception
+
+        '        End Try
+
+
+        '    End If
+
+
+        '    'ProgressBar1.Visible = True
+        '    'Timer1.Enabled = True
+
+        '    Cursor = Cursors.Default
+
+        'Else
+        '    'MsgBox("Load the data first...!!")
+        'End If
+#End Region
+
+
+    End Sub
+
+    Private Sub LoadBackGroundWorker()
+        Finish = False
+        ProgressBar1.Visible = True
+        Dim slowStuff = Task(Of Integer).Factory.StartNew(
+       Function() ExceuteSlowStuff(AddressOf Me.ShowProgress))
+
+
+    End Sub
+
+    Private Sub ShowProgress()
+        If Finish = False Then
+
+            If Me.ProgressBar1.InvokeRequired Then
+                Dim cross As New Action(AddressOf Me.ShowProgress)
+                Me.Invoke(cross)
+            Else
+                If Me.ProgressBar1.Value = 100 Then
+                    Me.ProgressBar1.Value = 1
+                    Me.ProgressBar1.Visible = False
+                    LoadPrint(dt)
+                    Finish = True
+                Else
+                    Me.ProgressBar1.Increment(1)
+                End If
+
+                '     Me.ProgressBar1.Refresh()
+            End If
+
+        End If
+    End Sub
+    Dim Finish As Boolean = False
+    Private Function ExceuteSlowStuff(ByVal progress As Action) As Integer
+
+        dt = getQueryStockCard(txtSupplierCode.Text, Format(Me.dateFrom.Value, "yyyy-MM-dd"), Format(Me.dateTo.Value, "yyyy-MM-dd"), ListItem)
+
+        Dim result = 0
+
+        For i = 0 To 10000
+            result += i
+            Thread.Sleep(200)
+            progress()
+        Next
+
+        Return result
+    End Function
+
+    'Sub bgw_DoWork(sender As Object, e As DoWorkEventArgs) Handles bgw.DoWork
+
+    '    dt = getQueryStockCard(txtSupplierCode.Text, Format(Me.dateFrom.Value, "yyyy-MM-dd"), Format(Me.dateTo.Value, "yyyy-MM-dd"), ListItem)
+
+    '    For i As Integer = 0 To 10000
+    '        If i Mod 1000 Then
+    '            bgw.ReportProgress(i / 100)
+
+    '        End If
+    '    Next
+
+    'End Sub
+
+
+
+
+
+    Private Sub LoadPrint(dt As DataTable)
+
+        For Each row As DataRow In dt.Rows
+
+            Dim obj As New stock_card
+
+            '     If current_row > x Then
+
+            With obj
+                .item_name = If(IsDBNull(row("a_name").ToString), "", row("a_name").ToString)
+                .item_desc = If(IsDBNull(row("desc").ToString), "", row("desc").ToString)
+                .item_code = If(IsDBNull(row("a_code").ToString), "", row("a_code").ToString)
+                .price = If(IsDBNull(row("price")), "", row("price"))
+                .uom = If(IsDBNull(row("uom").ToString), "", row("uom").ToString)
+                .brand_name = If(IsDBNull(row("brand_name").ToString), "", row("brand_name").ToString)
+                .re_order_cnt = If(IsDBNull(row("item_reordercount").ToString), "", row("item_reordercount").ToString)
+                .clusster = If(IsDBNull(row("fund_cluster").ToString), "", row("fund_cluster").ToString)
+                .initial_qty = If(IsDBNull(row("initial_qty").ToString), 0, row("initial_qty").ToString)
+                '  .sold = If(IsDBNull(row("sold").ToString), 0, row("sold").ToString)
+                '  .pullout = If(IsDBNull(row("pullout").ToString), 0, row("pullout").ToString)
+                .balance_qty = If(IsDBNull(row("balance_qty").ToString), 0, row("balance_qty").ToString)
+                .reference = If(IsDBNull(row("reference").ToString), "", row("reference").ToString)
+                .date_transaction = If(IsDBNull(row("TRD_Date").ToString), 0, row("TRD_Date").ToString)
+                .soldpullout = If(IsDBNull(row("soldpullout").ToString), 0, row("soldpullout").ToString)
+            End With
+
+            '    End If
+
+            stock_card.Add(obj)
+
+            '   x += 1
+        Next
+
+
+        Dim report As New xtrStockCard
+
+        report.DataSource = stock_card
+        report.PrintingSystem.Document.AutoFitToPagesWidth = 1
+        report.CreateDocument()
+        report.ShowPreview
+        stock_card.Clear()
+
+        ProgressBar1.Visible = False
+        lblpercent.Visible = False
+        lblpercent.Text = ""
+
+        ProgressBar1.Value = 0
+        System.Threading.Thread.Sleep(300)
+        dt = Nothing
 
 
     End Sub
@@ -560,10 +728,12 @@ Public Class fmaStockCardForm
 							AND TRD_Date BETWEEN '" & DateForm & "' AND '" & DateTo & "'
 							AND daily_inventory_details.a_code IN (" & ItemCode & ") 
 							ORDER BY
-							TRD_Date ASC
+							a_name,a_code,TRD_Date ASC
 							
-							)A   ORDER BY a_name,TRD_Date"
-        Return DataSource(sql)
+							)A  ORDER BY a_code,a_name,TRD_Date"
+        '    Return DataSource(sql)
+        Return clsDBConn.ExecLongQuery(sql)
+
     End Function
 
     Private Sub btnPrint_Enter(sender As Object, e As EventArgs)
@@ -573,17 +743,107 @@ Public Class fmaStockCardForm
 
     End Sub
 
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+
+        If ProgressBar1.Value <= ProgressBar1.Maximum - 1 Then
+            progressValue = (ctr * cnt) * ctrvalue
+            ProgressBar1.Value += progressValue
+        Else
+            If ProgressBar1.Value = 100 Then
+                Dim report As New xtrStockCard
+                report.DataSource = stock_card
+                report.PrintingSystem.Document.AutoFitToPagesWidth = 1
+                report.CreateDocument()
+                report.ShowPreview
+                stock_card.Clear()
+                ProgressBar1.Visible = False
+                Timer1.Enabled = False
+                ProgressBar1.Value = 1
+            End If
 
 
-    'Private Sub cmbItemCheck_LostFocus(sender As Object, e As EventArgs) Handles cmbItemCheck.LostFocus
-    '    Dim cmbItem As CheckedComboBoxEdit = DirectCast(sender, CheckedComboBoxEdit)
+        End If
+
+    End Sub
+
+    Private Sub BackgroundWorker1_DoWork(sender As Object, e As DoWorkEventArgs) Handles BackgroundWorker1.DoWork
+
+        'For i = 0 To 100
+        '    If BackgroundWorker1.CancellationPending = True Then
+        '        e.Cancel = True
+        '    Else
+        '        DoHeavyWork()
+        '        BackgroundWorker1.ReportProgress(i)
+        '    End If
+        'Next
 
 
-    '    Dim checkitem As Object = cmbItem.Properties.GetCheckedItems()
-    '    ListItem = checkitem
 
 
+        dt = getQueryStockCard(txtSupplierCode.Text, Format(Me.dateFrom.Value, "yyyy-MM-dd"), Format(Me.dateTo.Value, "yyyy-MM-dd"), ListItem)
+        For i = 1 To ProgressBar1.Maximum
+
+            If BackgroundWorker1.CancellationPending = True Then
+                e.Cancel = True
+            Else
+                DoHeavyWork()
+                BackgroundWorker1.ReportProgress(i)
+            End If
+        Next
 
 
-    'End Sub
+    End Sub
+
+    Private Sub BackgroundWorker1_ProgressChanged(sender As Object, e As ProgressChangedEventArgs) Handles BackgroundWorker1.ProgressChanged
+        Dim i As Integer = e.ProgressPercentage
+        If i >= 51 Then
+            lblpercent.BackColor = System.Drawing.Color.MediumSeaGreen
+        Else
+            lblpercent.BackColor = System.Drawing.SystemColors.ControlLight
+        End If
+        ProgressBar1.Value = e.ProgressPercentage
+        lblpercent.Text = e.ProgressPercentage.ToString() + "%"
+    End Sub
+
+    Private Sub BackgroundWorker1_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles BackgroundWorker1.RunWorkerCompleted
+
+        If e.Cancelled = True Then
+            MessageBox.Show("Cancelled")
+            ProgressBar1.Value = 0
+            lblpercent.Text = ""
+        ElseIf e.Error IsNot Nothing Then
+            MessageBox.Show(e.Error.Message)
+        Else
+            '    MessageBox.Show("Finished")
+            LoadPrint(dt)
+        End If
+
+    End Sub
+
+
+    Private Sub DoHeavyWork()
+
+        System.Threading.Thread.Sleep(300)
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        If Not BackgroundWorker1.IsBusy = True Then
+            BackgroundWorker1.RunWorkerAsync()
+        End If
+
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        If Not BackgroundWorker1.WorkerSupportsCancellation = True Then
+            BackgroundWorker1.CancelAsync()
+        End If
+
+    End Sub
+
+    Private Sub fmaStockCardForm_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+        If e.KeyCode = Keys.Escape Then
+            Button2.PerformClick()
+        End If
+    End Sub
 End Class

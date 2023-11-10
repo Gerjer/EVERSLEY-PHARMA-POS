@@ -47,6 +47,8 @@ Partial Class fmaPriceAvailableListForm
         Me.GridColumn8 = New DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.cbxAllowEdit = New System.Windows.Forms.CheckBox()
+        Me.cxbxAll = New System.Windows.Forms.CheckBox()
         Me.dtpTo = New System.Windows.Forms.DateTimePicker()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -68,7 +70,6 @@ Partial Class fmaPriceAvailableListForm
         Me.DeleteSelectedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeleteSelectedToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.GridColumn1 = New DevExpress.XtraGrid.Columns.GridColumn()
-        Me.cxbxAll = New System.Windows.Forms.CheckBox()
         Me.GroupPanel2.SuspendLayout()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BandedGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -142,8 +143,9 @@ Partial Class fmaPriceAvailableListForm
         'BandedGridView1
         '
         Me.BandedGridView1.Appearance.FocusedCell.BackColor = System.Drawing.Color.Transparent
-        Me.BandedGridView1.Appearance.FocusedCell.ForeColor = System.Drawing.SystemColors.HighlightText
+        Me.BandedGridView1.Appearance.FocusedCell.ForeColor = System.Drawing.SystemColors.Desktop
         Me.BandedGridView1.Appearance.FocusedCell.Options.UseBackColor = True
+        Me.BandedGridView1.Appearance.FocusedCell.Options.UseFont = True
         Me.BandedGridView1.Appearance.FocusedCell.Options.UseForeColor = True
         Me.BandedGridView1.Appearance.GroupRow.BackColor = System.Drawing.Color.Transparent
         Me.BandedGridView1.Appearance.GroupRow.BackColor2 = System.Drawing.Color.Transparent
@@ -156,7 +158,6 @@ Partial Class fmaPriceAvailableListForm
         Me.BandedGridView1.GroupFormat = "{1}"
         Me.BandedGridView1.Name = "BandedGridView1"
         Me.BandedGridView1.OptionsBehavior.AutoExpandAllGroups = True
-        Me.BandedGridView1.OptionsBehavior.Editable = False
         Me.BandedGridView1.OptionsSelection.UseIndicatorForSelection = False
         Me.BandedGridView1.OptionsView.ShowColumnHeaders = False
         Me.BandedGridView1.OptionsView.ShowGroupExpandCollapseButtons = False
@@ -203,6 +204,8 @@ Partial Class fmaPriceAvailableListForm
         Me.GridColumn4.FieldName = "item"
         Me.GridColumn4.MinWidth = 19
         Me.GridColumn4.Name = "GridColumn4"
+        Me.GridColumn4.OptionsColumn.AllowEdit = False
+        Me.GridColumn4.OptionsColumn.ReadOnly = True
         Me.GridColumn4.Visible = True
         Me.GridColumn4.Width = 450
         '
@@ -359,6 +362,7 @@ Partial Class fmaPriceAvailableListForm
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.cbxAllowEdit)
         Me.GroupBox1.Controls.Add(Me.cxbxAll)
         Me.GroupBox1.Controls.Add(Me.dtpTo)
         Me.GroupBox1.Controls.Add(Me.Label1)
@@ -374,6 +378,26 @@ Partial Class fmaPriceAvailableListForm
         Me.GroupBox1.TabIndex = 30
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "DATE FILTER"
+        '
+        'cbxAllowEdit
+        '
+        Me.cbxAllowEdit.AutoSize = True
+        Me.cbxAllowEdit.Location = New System.Drawing.Point(367, 51)
+        Me.cbxAllowEdit.Name = "cbxAllowEdit"
+        Me.cbxAllowEdit.Size = New System.Drawing.Size(87, 21)
+        Me.cbxAllowEdit.TabIndex = 32
+        Me.cbxAllowEdit.Text = "Allow Edit"
+        Me.cbxAllowEdit.UseVisualStyleBackColor = True
+        '
+        'cxbxAll
+        '
+        Me.cxbxAll.AutoSize = True
+        Me.cxbxAll.Location = New System.Drawing.Point(367, 24)
+        Me.cxbxAll.Name = "cxbxAll"
+        Me.cxbxAll.Size = New System.Drawing.Size(80, 21)
+        Me.cxbxAll.TabIndex = 31
+        Me.cxbxAll.Text = "Show All"
+        Me.cxbxAll.UseVisualStyleBackColor = True
         '
         'dtpTo
         '
@@ -619,16 +643,15 @@ Partial Class fmaPriceAvailableListForm
         Me.btnAdd.Dock = System.Windows.Forms.DockStyle.Left
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdd.Image = Global.ArkAntSoftwarePOS.My.Resources.Resources.add
+        Me.btnAdd.Image = Global.ArkAntSoftwarePOS.My.Resources.Resources.report
         Me.btnAdd.Location = New System.Drawing.Point(0, 0)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(86, 32)
         Me.btnAdd.TabIndex = 20
-        Me.btnAdd.Text = "Add"
+        Me.btnAdd.Text = "Load"
         Me.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnAdd.UseVisualStyleBackColor = True
-        Me.btnAdd.Visible = False
         '
         'CMenuStripOperations
         '
@@ -658,16 +681,6 @@ Partial Class fmaPriceAvailableListForm
         'GridColumn1
         '
         Me.GridColumn1.Name = "GridColumn1"
-        '
-        'cxbxAll
-        '
-        Me.cxbxAll.AutoSize = True
-        Me.cxbxAll.Location = New System.Drawing.Point(367, 24)
-        Me.cxbxAll.Name = "cxbxAll"
-        Me.cxbxAll.Size = New System.Drawing.Size(80, 21)
-        Me.cxbxAll.TabIndex = 31
-        Me.cxbxAll.Text = "Show All"
-        Me.cxbxAll.UseVisualStyleBackColor = True
         '
         'fmaPriceAvailableListForm
         '
@@ -740,4 +753,5 @@ Partial Class fmaPriceAvailableListForm
     Friend WithEvents gridBand6 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents gridBand7 As DevExpress.XtraGrid.Views.BandedGrid.GridBand
     Friend WithEvents cxbxAll As CheckBox
+    Friend WithEvents cbxAllowEdit As CheckBox
 End Class

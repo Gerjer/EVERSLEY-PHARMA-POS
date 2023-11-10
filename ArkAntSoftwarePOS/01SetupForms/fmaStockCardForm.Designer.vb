@@ -53,9 +53,15 @@ Partial Class fmaStockCardForm
         Me.btnClose = New DevComponents.DotNetBar.ButtonX()
         Me.tdbViewer = New C1.Win.C1TrueDBGrid.C1TrueDBGrid()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.lblpercent = New DevComponents.DotNetBar.LabelX()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.CMenuStripOperations = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.DeleteSelectedToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DeleteSelectedToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.GroupPanel2.SuspendLayout()
         CType(Me.GridControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.GridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -65,6 +71,7 @@ Partial Class fmaStockCardForm
         CType(Me.dateTo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tdbViewer, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PanelEx1.SuspendLayout()
         Me.CMenuStripOperations.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -96,7 +103,7 @@ Partial Class fmaStockCardForm
         Me.GroupPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupPanel2.Location = New System.Drawing.Point(0, 0)
         Me.GroupPanel2.Name = "GroupPanel2"
-        Me.GroupPanel2.Size = New System.Drawing.Size(1078, 568)
+        Me.GroupPanel2.Size = New System.Drawing.Size(1302, 568)
         '
         '
         '
@@ -125,7 +132,7 @@ Partial Class fmaStockCardForm
         Me.GridControl1.Location = New System.Drawing.Point(0, 199)
         Me.GridControl1.MainView = Me.GridView1
         Me.GridControl1.Name = "GridControl1"
-        Me.GridControl1.Size = New System.Drawing.Size(1072, 322)
+        Me.GridControl1.Size = New System.Drawing.Size(1296, 322)
         Me.GridControl1.TabIndex = 24
         Me.GridControl1.ViewCollection.AddRange(New DevExpress.XtraGrid.Views.Base.BaseView() {Me.GridView1})
         '
@@ -135,11 +142,15 @@ Partial Class fmaStockCardForm
         Me.GridView1.Appearance.FocusedCell.ForeColor = System.Drawing.SystemColors.HighlightText
         Me.GridView1.Appearance.FocusedCell.Options.UseBackColor = True
         Me.GridView1.Appearance.FocusedCell.Options.UseForeColor = True
+        Me.GridView1.Appearance.GroupRow.Font = New System.Drawing.Font("Tahoma", 10.0!)
+        Me.GridView1.Appearance.GroupRow.Options.UseFont = True
         Me.GridView1.GridControl = Me.GridControl1
         Me.GridView1.GroupFormat = "{1} "
+        Me.GridView1.GroupRowHeight = 15
         Me.GridView1.Name = "GridView1"
         Me.GridView1.OptionsBehavior.AutoExpandAllGroups = True
         Me.GridView1.OptionsBehavior.Editable = False
+        Me.GridView1.OptionsBehavior.KeepGroupExpandedOnSorting = False
         Me.GridView1.OptionsFind.AlwaysVisible = True
         Me.GridView1.OptionsFind.Behavior = DevExpress.XtraEditors.FindPanelBehavior.Filter
         Me.GridView1.OptionsFind.FindDelay = 300
@@ -173,7 +184,7 @@ Partial Class fmaStockCardForm
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1072, 199)
+        Me.GroupBox1.Size = New System.Drawing.Size(1296, 199)
         Me.GroupBox1.TabIndex = 22
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "FILTER"
@@ -202,7 +213,7 @@ Partial Class fmaStockCardForm
         Me.PanelEx2.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PanelEx2.Location = New System.Drawing.Point(3, 16)
         Me.PanelEx2.Name = "PanelEx2"
-        Me.PanelEx2.Size = New System.Drawing.Size(1066, 41)
+        Me.PanelEx2.Size = New System.Drawing.Size(1290, 41)
         Me.PanelEx2.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx2.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.PanelEx2.Style.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
@@ -376,13 +387,14 @@ Partial Class fmaStockCardForm
         Me.btnLoad.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnLoad.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnLoad.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnLoad.Location = New System.Drawing.Point(436, 136)
+        Me.btnLoad.Location = New System.Drawing.Point(366, 136)
         Me.btnLoad.Name = "btnLoad"
         Me.btnLoad.Shortcuts.Add(DevComponents.DotNetBar.eShortcut.CtrlL)
-        Me.btnLoad.Size = New System.Drawing.Size(142, 37)
+        Me.btnLoad.Size = New System.Drawing.Size(86, 37)
         Me.btnLoad.TabIndex = 112
         Me.btnLoad.Text = "&LOAD"
         Me.btnLoad.Tooltip = "CTRL+L"
+        Me.btnLoad.Visible = False
         '
         'txtItemCode
         '
@@ -450,7 +462,8 @@ Partial Class fmaStockCardForm
         Me.btnPrint.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnPrint.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnPrint.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPrint.Location = New System.Drawing.Point(582, 136)
+        Me.btnPrint.Image = Global.ArkAntSoftwarePOS.My.Resources.Resources.Print_24x24
+        Me.btnPrint.Location = New System.Drawing.Point(542, 136)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Size = New System.Drawing.Size(142, 37)
         Me.btnPrint.TabIndex = 103
@@ -462,7 +475,8 @@ Partial Class fmaStockCardForm
         Me.btnClose.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground
         Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnClose.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClose.Location = New System.Drawing.Point(729, 136)
+        Me.btnClose.Image = Global.ArkAntSoftwarePOS.My.Resources.Resources.close
+        Me.btnClose.Location = New System.Drawing.Point(689, 136)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(142, 37)
         Me.btnClose.TabIndex = 102
@@ -511,19 +525,71 @@ Partial Class fmaStockCardForm
         '
         Me.PanelEx1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.PanelEx1.Controls.Add(Me.Button2)
+        Me.PanelEx1.Controls.Add(Me.Button1)
+        Me.PanelEx1.Controls.Add(Me.lblpercent)
+        Me.PanelEx1.Controls.Add(Me.ProgressBar1)
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PanelEx1.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PanelEx1.Location = New System.Drawing.Point(0, 521)
         Me.PanelEx1.Name = "PanelEx1"
-        Me.PanelEx1.Size = New System.Drawing.Size(1072, 41)
+        Me.PanelEx1.Size = New System.Drawing.Size(1296, 41)
         Me.PanelEx1.Style.Alignment = System.Drawing.StringAlignment.Center
-        Me.PanelEx1.Style.BackColor1.Color = System.Drawing.Color.LightBlue
-        Me.PanelEx1.Style.BackColor2.Color = System.Drawing.Color.SkyBlue
+        Me.PanelEx1.Style.BackColor1.Color = System.Drawing.Color.Transparent
+        Me.PanelEx1.Style.BackColor2.Color = System.Drawing.Color.Transparent
         Me.PanelEx1.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
         Me.PanelEx1.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
         Me.PanelEx1.Style.ForeColor.Color = System.Drawing.SystemColors.MenuText
         Me.PanelEx1.Style.GradientAngle = 90
         Me.PanelEx1.TabIndex = 122
+        '
+        'Button2
+        '
+        Me.Button2.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(643, 3)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(142, 33)
+        Me.Button2.TabIndex = 252
+        Me.Button2.Text = "Cancel"
+        Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.Visible = False
+        '
+        'Button1
+        '
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(478, 5)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(142, 33)
+        Me.Button1.TabIndex = 251
+        Me.Button1.Text = "Run"
+        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Visible = False
+        '
+        'lblpercent
+        '
+        Me.lblpercent.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblpercent.AutoSize = True
+        Me.lblpercent.BackColor = System.Drawing.SystemColors.Control
+        Me.lblpercent.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblpercent.Location = New System.Drawing.Point(1130, 13)
+        Me.lblpercent.Name = "lblpercent"
+        Me.lblpercent.Size = New System.Drawing.Size(12, 15)
+        Me.lblpercent.TabIndex = 250
+        Me.lblpercent.Text = "%"
+        Me.lblpercent.Visible = False
+        '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ProgressBar1.Location = New System.Drawing.Point(978, 9)
+        Me.ProgressBar1.MarqueeAnimationSpeed = 500
+        Me.ProgressBar1.Maximum = 101
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(303, 23)
+        Me.ProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.ProgressBar1.TabIndex = 0
+        Me.ProgressBar1.Visible = False
         '
         'CMenuStripOperations
         '
@@ -552,6 +618,15 @@ Partial Class fmaStockCardForm
         Me.DeleteSelectedToolStripMenuItem1.Text = "Edit Selected"
         Me.DeleteSelectedToolStripMenuItem1.Visible = False
         '
+        'Timer1
+        '
+        Me.Timer1.Interval = 50
+        '
+        'BackgroundWorker1
+        '
+        Me.BackgroundWorker1.WorkerReportsProgress = True
+        Me.BackgroundWorker1.WorkerSupportsCancellation = True
+        '
         'fmaStockCardForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -559,7 +634,7 @@ Partial Class fmaStockCardForm
         Me.BackColor = System.Drawing.Color.SkyBlue
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.CancelButton = Me.btnClose
-        Me.ClientSize = New System.Drawing.Size(1078, 568)
+        Me.ClientSize = New System.Drawing.Size(1302, 568)
         Me.Controls.Add(Me.GroupPanel2)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "fmaStockCardForm"
@@ -576,6 +651,8 @@ Partial Class fmaStockCardForm
         CType(Me.dateTo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtYear, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tdbViewer, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PanelEx1.ResumeLayout(False)
+        Me.PanelEx1.PerformLayout()
         Me.CMenuStripOperations.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -612,4 +689,10 @@ Partial Class fmaStockCardForm
     Friend WithEvents GridView1 As DevExpress.XtraGrid.Views.Grid.GridView
     Friend WithEvents cmbItemCheck As DevExpress.XtraEditors.CheckedComboBoxEdit
     Friend WithEvents PanelEx1 As DevComponents.DotNetBar.PanelEx
+    Friend WithEvents Timer1 As Timer
+    Friend WithEvents ProgressBar1 As ProgressBar
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents lblpercent As DevComponents.DotNetBar.LabelX
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button1 As Button
 End Class
